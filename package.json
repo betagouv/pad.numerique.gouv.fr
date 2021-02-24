@@ -13,8 +13,9 @@
     "standard": "echo 'standard is no longer being used, use `npm run eslint` instead!' && exit 1",
     "dev": "webpack --config webpack.dev.js --progress --watch",
     "heroku-prebuild": "bin/heroku",
-    "build": "webpack --config webpack.prod.js --progress",
-    "start": "node app.js"
+    "build": "webpack --config webpack.prod.js --progress --colors --bail",
+    "start": "sequelize db:migrate && node app.js",
+    "postinstall": "bin/heroku"
   },
   "dependencies": {
     "@passport-next/passport-openid": "^1.0.0",
