@@ -18,5 +18,4 @@ cat << EOF > config.json
     }
   }
 }
-
 EOF
