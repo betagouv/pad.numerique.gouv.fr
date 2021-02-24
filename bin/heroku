@@ -2,25 +2,23 @@
 
 set -e
 
-
-cat << EOF > .sequelizerc	if [ ! -z "$DYNO" ]; then
+if [ ! -z "$DYNO" ]; then
   # setup config files
   cat << EOF > .sequelizerc
-var path = require('path');	var path = require('path');
-module.exports = {	module.exports = {
-    'config':          path.resolve('config.json'),	    'config':          path.resolve('config.json'),
-    'migrations-path': path.resolve('lib', 'migrations'),	    'migrations-path': path.resolve('lib', 'migrations'),
-    'models-path':     path.resolve('lib', 'models'),	    'models-path':     path.resolve('lib', 'models'),
-    'url':             process.env.DATABASE_URL	    'url':             process.env.DATABASE_URL
-}	}
-EOF	EOF
+var path = require('path');
+module.exports = {
+    'config':          path.resolve('config.json'),
+    'migrations-path': path.resolve('lib', 'migrations'),
+    'models-path':     path.resolve('lib', 'models'),
+    'url':             process.env.DATABASE_URL
+}
+EOF
 
-
-cat << EOF > config.json	    cat << EOF > config.json
-{	{
-  "production": {	  "production": {
-  }	  }
-}	}
-EOF	EOF
+    cat << EOF > config.json
+{
+  "production": {
+  }
+}
+EOF
 
 fi
