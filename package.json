@@ -14,7 +14,8 @@
     "dev": "webpack --config webpack.dev.js --progress --colors --watch",
     "heroku-prebuild": "bin/heroku",
     "build": "webpack --config webpack.prod.js --progress --colors --bail",
-    "start": "sequelize db:migrate && node app.js"
+    "start": "sequelize db:migrate && node app.js",
+    "postinstall": "bin/heroku"
   },
   "dependencies": {
     "@passport-next/passport-openid": "^1.0.0",
