@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 set -e
@@ -18,5 +19,6 @@ cat << EOF > config.json
     }
   }
 }
-
 EOF
+
+fi
