@@ -2,9 +2,7 @@
 
 set -e
 
-if [ ! -z "$DYNO" ]; then
-  # setup config files
-  cat << EOF > .sequelizerc
+cat << EOF > .sequelizerc
 var path = require('path');
 module.exports = {
     'config':          path.resolve('config.json'),
@@ -14,11 +12,9 @@ module.exports = {
 }
 EOF
 
-    cat << EOF > config.json
+cat << EOF > config.json
 {
   "production": {
   }
 }
 EOF
-
-fi
