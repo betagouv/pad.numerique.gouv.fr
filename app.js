@@ -213,7 +213,7 @@ app.locals.authProviders = {
   oauth2: config.isOAuth2Enable,
   oauth2ProviderName: config.oauth2.providerName,
   openID: config.isOpenIDEnable,
-  email: config.isEmailEnable,
+  email: config.isEmailEnable && !config.isEmailEnableForBotOnly,
   allowEmailRegister: config.allowEmailRegister
 }
 
