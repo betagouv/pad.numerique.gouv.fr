@@ -410,3 +410,8 @@ small .dropdown a:focus, small .dropdown a:hover {
         font-size: 12px !important;
     }
 }
+
+/* Disable Image Upload for doc.incubateur.net */
+.ui-upload-image {
+    display: none; 
+}
