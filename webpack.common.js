@@ -200,7 +200,6 @@ module.exports = {
       path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css'),
       path.join(__dirname, 'node_modules/fork-awesome/css/fork-awesome.min.css'),
       path.join(__dirname, 'public/css/bootstrap-social.css'),
-      path.join(__dirname, 'public/css/dsfr.css'),
       path.join(__dirname, 'node_modules/select2/select2.css'),
       path.join(__dirname, 'node_modules/select2/select2-bootstrap.css')
     ],
@@ -251,7 +250,6 @@ module.exports = {
       path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css'),
       path.join(__dirname, 'node_modules/fork-awesome/css/fork-awesome.min.css'),
       path.join(__dirname, 'public/css/bootstrap-social.css'),
-      path.join(__dirname, 'public/css/dsfr.css'),
       path.join(__dirname, 'node_modules/ionicons/css/ionicons.min.css')
     ],
     'index-pack': [
