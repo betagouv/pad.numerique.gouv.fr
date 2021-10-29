@@ -201,8 +201,8 @@ module.exports = {
       path.join(__dirname, 'node_modules/fork-awesome/css/fork-awesome.min.css'),
       path.join(__dirname, 'public/css/bootstrap-social.css'),
       path.join(__dirname, 'node_modules/select2/select2.css'),
-      path.join(__dirname, 'node_modules/select2/select2-bootstrap.css')
-      path.join(__dirname, 'public/css/dsfr.css'),
+      path.join(__dirname, 'node_modules/select2/select2-bootstrap.css'),
+      path.join(__dirname, 'public/css/dsfr.css') 
     ],
     'cover-pack': [
       'babel-polyfill',
