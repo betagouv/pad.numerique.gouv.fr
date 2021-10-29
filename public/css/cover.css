@@ -4,9 +4,9 @@
 
 /* Links */
 
-div:not([class^="fr-"]) a,
-div:not([class^="fr-"]) a:focus,
-div:not([class^="fr-"]) a:hover {
+a,
+a:focus,
+a:hover {
     color: #fff;
 }
 /* Custom default button */
@@ -32,7 +32,7 @@ body {
 }
 body {
     min-height: 100%;
-    /* color: #fff; */
+    color: #fff;
     text-align: center;
     text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
 }
@@ -375,8 +375,4 @@ select {
 
 .cover-heading img {
     max-width: 100%;
-}
-
-html {
-    font-size: 16px;
 }
