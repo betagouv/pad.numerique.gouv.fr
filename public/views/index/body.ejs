@@ -28,15 +28,12 @@
                     <div>
                         <div class="fr-header__tools-links">
                             <ul class="fr-links-group">
-                                <li>
-                                    <a data-test-id="login-button" class="fr-link" href="/psychologue/login">Se connecter en tant que psychologue</a>
-                                </li>
                                 <li style="<% if(signin) { %> display: none;<% } %>">
                                     <% if (allowAnonymous) { %>
                                     <a type="button" href="<%- serverURL %>/new" class="fr-link"><i class="fa fa-plus"></i> <%= __('New guest note') %></a>
                                     <% } %>
                                     <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
-                                    <a class="fr-link" data-toggle="modal" data-target=".signin-modal"><%= __('Sign In') %></button>
+                                    <a class="fr-link" data-toggle="modal" data-target=".signin-modal"><%= __('Sign In') %></a>
                                     <% } %>
                                 </li>
                                 <li style="float: right; margin-top: 8px;<% if(!signin) { %> display: none;<% } %>">
