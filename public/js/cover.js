@@ -29,7 +29,7 @@ import S from 'string'
 
 require('./locale')
 
-// require('../css/cover.css')
+require('../css/cover.css')
 require('../css/site.css')
 
 const options = {
