@@ -4,11 +4,11 @@
 
 /* Links */
 
-/* div:not(.fr-container) a,
-div:not(.fr-container) a:focus,
-div:not(.fr-container) a:hover {
+div:not([class^="fr-"]) a,
+div:not([class^="fr-"]) a:focus,
+div:not([class^="fr-"]) a:hover {
     color: #fff;
-} */
+}
 /* Custom default button */
 
 .btn-default,
