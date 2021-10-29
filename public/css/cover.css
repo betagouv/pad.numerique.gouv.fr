@@ -4,9 +4,9 @@
 
 /* Links */
 
-a,
-a:focus,
-a:hover {
+div:not(.fr-container) a,
+div:not(.fr-container) a:focus,
+div:not(.fr-container) a:hover {
     color: #fff;
 }
 /* Custom default button */
@@ -375,4 +375,8 @@ select {
 
 .cover-heading img {
     max-width: 100%;
+}
+
+html {
+    font-size: 16px;
 }
