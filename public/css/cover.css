@@ -4,9 +4,9 @@
 
 /* Links */
 
-div:not([class^="fr-"]) a,
-div:not([class^="fr-"]) a:focus,
-div:not([class^="fr-"]) a:hover {
+:not([class^="fr-"]) > a,
+:not([class^="fr-"]) > a:focus,
+:not([class^="fr-"]) > a:hover {
     color: #fff;
 }
 /* Custom default button */

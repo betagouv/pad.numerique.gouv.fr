@@ -119,13 +119,13 @@ app.use(csp.addNonceToLocals)
 
 // use Content-Security-Policy to limit XSS, dangerous plugins, etc.
 // https://helmetjs.github.io/docs/csp/
-if (config.csp.enable) {
-  app.use(helmet.contentSecurityPolicy({
-    directives: csp.computeDirectives()
-  }))
-} else {
-  logger.info('Content-Security-Policy is disabled. This may be a security risk.')
-}
+// if (config.csp.enable) {
+//   app.use(helmet.contentSecurityPolicy({
+//     directives: csp.computeDirectives()
+//   }))
+// } else {
+//   logger.info('Content-Security-Policy is disabled. This may be a security risk.')
+// }
 
 i18n.configure({
   locales: supportedLocalesList,
