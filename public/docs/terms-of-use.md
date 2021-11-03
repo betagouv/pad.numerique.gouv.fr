@@ -17,8 +17,3 @@ Nadi Bou Hana - Directeur
 Ce site est hébergé par la société Scalingo : 
 15 avenue du Rhin
 67100 Strasbourg 
-
-## À savoir
-L'accès à la plateforme nécessite d'être membre de l'organisation beta.gouv sur Github.
-
-La présente plateforme n'utilise pas de cookie ou autres trackers.
