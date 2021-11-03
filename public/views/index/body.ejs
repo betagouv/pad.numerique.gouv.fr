@@ -41,7 +41,7 @@
                                     <a type="button" href="<%- serverURL %>/new" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> <%= __('New guest note') %></a>
                                     <% } %>
                                     <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
-                                    <button class="btn btn-sm btn-success ui-signin" data-toggle="modal" data-target=".signin-modal"><%= __('Sign In') %></button>
+                                    <a class="btn btn-sm btn-success ui-signin" href="<%- serverURL %>/auth/oauth2"><%= __('Sign In') %></a>
                                     <% } %>
                                 </div>
                                 <div class="ui-signout" style="float: right; margin-top: 8px;<% if(!signin) { %> display: none;<% } %>">
@@ -65,11 +65,12 @@
 
                 <div id="home" class="section"<% if(signin) { %> style="display:none;"<% } %>>
                     <div class="inner cover">
+                        <h1 class="cover-heading" style="color: white;">Le pad de l'état</h1>
                         <!-- <h1 class="cover-heading"><img src="<%- serverURL %>/banner/banner_vertical_color.svg" width="400" alt="HedgeDoc logo"></h1> -->
-                        <p class="lead">
+                        <p class="lead" style="color: white;">
                             <%= __('Best way to write and share your knowledge in markdown.') %>
                         </p>
-                        <% if (infoMessage && infoMessage.length > 0) { %>
+                        <!-- <% if (infoMessage && infoMessage.length > 0) { %>
                         <div class="alert alert-info" style="max-width: 400px; margin: 0 auto;"><%= infoMessage %></div>
                         <% } %>
                         <% if (errorMessage && errorMessage.length > 0) { %>
@@ -81,14 +82,14 @@
                             <a type="button" class="btn btn-lg btn-success ui-signin" data-toggle="modal" data-target=".signin-modal" style="min-width: 200px;"><%= __('Sign In') %></a>
                         </span>
                         <span class="ui-or"><%= __('or') %></span>
-                        <% } %>
+                        <% } %> -->
                         <span class="ui-signin">
                             <a type="button" href="<%- serverURL %>/features" class="btn btn-lg btn-primary" style="min-width: 200px;"><%= __('Explore all features') %></a>
                             <br>
                             <br>
                             <!-- <img src="<%- serverURL %>/screenshot.png" class="screenshot ui-signin"> -->
                         </span>
-                        <div class="lead row" style="width: 90%; margin: 0 auto;">
+                        <!-- <div class="lead row" style="width: 90%; margin: 0 auto;">
                             <div class="col-md-4 inner">
                                 <a href="<%- serverURL %>/features#Share-Notes">
                                     <i class="fa fa-bolt fa-3x"></i>
@@ -107,7 +108,7 @@
                                     <h4><%= __('Support slide mode') %></h4>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
