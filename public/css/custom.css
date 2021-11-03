@@ -2031,3 +2031,17 @@
     /* color: #383838; */
  }
  
+ .fr-header {
+    font-family: "Marianne", arial, sans-serif;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--w);
+    --block-color-hover: rgba(224, 224, 224, 0.5);
+    --block-color-active: rgba(194, 194, 194, 0.5);
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+ }
