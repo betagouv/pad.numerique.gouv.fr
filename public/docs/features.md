@@ -5,8 +5,18 @@ tags: features, cool, updated
 
 ## Introduction
 
-Le "pad de l'état" use **HedgeDoc**, a real-time, multi-platform collaborative markdown note editor.
+Le pad de l'état utilise le logiciel open source [Hedgedoc](https://github.com/hedgedoc/hedgedoc), hebergé à la DINUM. L'adresse du serveur est https://pad.numerique.gouv.fr.
+Ci après la documentation détaillée en anglais des fonctionnalités du logociel hedgedoc.
+Pour des informations générale en français sur le pad et ses fonctionnalités de base voir les deux pages suivantes :
+- https://pad.numerique.gouv.fr/apropos
+- https://pad.numerique.gouv.fr/atelier
+
+**HedgeDoc** is a real-time, multi-platform collaborative markdown note editor.
 This means that you can write notes with other people on your **desktop**, **tablet** or even on the **phone**.
+
+If you experience any *issues*, feel free to report it on [**GitHub**](https://github.com/hedgedoc/hedgedoc/issues).
+Or meet us on [**Matrix**](https://chat.hedgedoc.org) for dev-talk and interactive help.
+**Thank you very much!**
 
 ## Workspace
 
