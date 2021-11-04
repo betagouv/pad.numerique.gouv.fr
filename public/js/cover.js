@@ -208,7 +208,7 @@ function historyCloseClick (e) {
   e.preventDefault()
   const id = $(this).closest('a').siblings('span').html()
   const value = historyList.get('id', id)[0]._values
-  $('.ui-delete-history-modal-msg').text('Do you really want to delete below history?')
+  $('.ui-delete-history-modal-msg').text('Voulez-vous vraiment supprimer cette note de votre historique ?')
   $('.ui-delete-history-modal-item').html(`<i class="fa fa-file-text"></i> ${value.text}<br><i class="fa fa-clock-o"></i> ${value.time}`)
   clearHistory = false
   deleteId = id
