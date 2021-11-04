@@ -2074,5 +2074,9 @@ body {
 }
 
 .mastfoot a {
-  color: white
+  color: white;
+}
+
+.h4.ui-nohistory {
+  color: white;
 }
