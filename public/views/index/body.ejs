@@ -14,9 +14,9 @@
                 </div>
                 <div class="fr-header__service">
                     <a href="/" title="Accueil - Pad numerique">
-                    <p class="fr-header__service-title">Pad de l'état</p>
+                    <p class="fr-header__service-title">Notepad de l'État</p>
                     </a>
-                    <p class="fr-header__service-tagline"><%= __('Collaborative markdown notes') %></p>
+                    <p class="fr-header__service-tagline">Plateforme de notes collaboratives</p>
                     <!-- <p class="fr-header__service-tagline">Pad numerique de l'etat</p> -->
                 </div>
                 </div>
@@ -41,7 +41,7 @@
                                     <a type="button" href="<%- serverURL %>/new" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> <%= __('New guest note') %></a>
                                     <% } %>
                                     <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
-                                    <a class="btn btn-sm btn-success ui-signin" href="<%- serverURL %>/auth/oauth2"><%= __('Sign In') %></a>
+                                    <a class="fr-btn fr-btn--primary fr-btn--white" href="<%- serverURL %>/auth/oauth2"><%= __('Sign In') %></a>
                                     <% } %>
                                 </div>
                                 <div class="ui-signout" style="float: right; margin-top: 8px;<% if(!signin) { %> display: none;<% } %>">
@@ -51,7 +51,7 @@
                                             <img class="ui-avatar" width="20" height="20"><span class="hidden-xs hidden-sm">&ensp;<span class="ui-name"></span></span>&ensp;<i class="fa fa-caret-down"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="profileLabel">
-                                            <li><a href="<%- serverURL %>/features"><i class="fa fa-dot-circle-o fa-fw"></i> <%= __('Features') %></a></li>
+                                            <li><a href="<%- serverURL %>/fonctionnalites"><i class="fa fa-dot-circle-o fa-fw"></i> <%= __('Features') %></a></li>
                                             <li><a href="<%- serverURL %>/me/export"><i class="fa fa-cloud-download fa-fw"></i> <%= __('Export user data') %></a></li>
                                             <li><a class="ui-delete-user" data-toggle="modal" data-target=".delete-user-modal"><i class="fa fa-trash fa-fw"></i> <%= __('Delete user') %></a></li>
                                             <li><a href="<%- serverURL %>/logout"><i class="fa fa-sign-out fa-fw"></i> <%= __('Sign Out') %></a></li>
@@ -65,7 +65,7 @@
 
                 <div id="home" class="section"<% if(signin) { %> style="display:none;"<% } %>>
                     <div class="inner cover">
-                        <h1 class="cover-heading" style="color: white;">Le pad de l'état</h1>
+                        <h1 class="cover-heading" style="color: white;">Notepad de l'État</h1>
                         <!-- <h1 class="cover-heading"><img src="<%- serverURL %>/banner/banner_vertical_color.svg" width="400" alt="HedgeDoc logo"></h1> -->
                         <p class="lead" style="color: white;">
                             <%= __('Best way to write and share your knowledge in markdown.') %>
@@ -84,7 +84,7 @@
                         <span class="ui-or"><%= __('or') %></span>
                         <% } %> -->
                         <span class="ui-signin">
-                            <a type="button" href="<%- serverURL %>/apropos" class="btn btn-lg btn-primary" style="min-width: 200px;">Qu'est ce que le pad ?</a>
+                            <a type="button" href="<%- serverURL %>/apropos" class="fr-btn fr-btn--secondary fr-btn--white-outline" style="min-width: 200px;">Qu'est ce que le pad ?</a>
                             <br>
                             <br>
                             <!-- <img src="<%- serverURL %>/screenshot.png" class="screenshot ui-signin"> -->
@@ -114,7 +114,7 @@
 
                 <div id="history" class="section"<% if(!signin) { %> style="display:none;"<% } %>>
                     <div class="ui-signin"<% if(signin) { %> style="display:none;"<% } %>>
-                        <p><%= __('Below is the history from browser') %></p>
+                        <p style="color: white;"><%= __('Below is the history from browser') %></p>
                     </div>
                     <br>
                     <form class="form-inline">

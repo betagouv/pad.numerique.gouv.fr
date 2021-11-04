@@ -3,12 +3,12 @@
  */
 
 /* Links */
-
+/* 
 :not([class^="fr-"]) > a,
 :not([class^="fr-"]) > a:focus,
 :not([class^="fr-"]) > a:hover {
     color: #fff;
-}
+} */
 /* Custom default button */
 
 .btn-default,

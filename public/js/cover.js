@@ -28,8 +28,8 @@ import List from 'list.js'
 import S from 'string'
 
 require('./locale')
-
 require('../css/cover.css')
+require('../css/custom.css')
 require('../css/site.css')
 
 const options = {
