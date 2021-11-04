@@ -1,4 +1,4 @@
-Mentions légales pad.incubateur.net
+Mentions légales pad.numerique.gouv.fr
 
 # Mentions légales 
 
