@@ -38,10 +38,12 @@
                                 </li>
                                 <div class="ui-signin" style="float: right; margin-top: 8px;<% if(signin) { %> display: none;<% } %>">
                                     <% if (allowAnonymous) { %>
-                                    <a type="button" href="<%- serverURL %>/new" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> <%= __('New guest note') %></a>
+                                    <a type="button" href="<%- serverURL %>/new" class="fr-btn fr-btn--sm fr-btn--secondary fr-btn--white-outline fr-btn--icon-left fr-fi-add-line">
+                                        <!-- <i class="fa fa-plus"></i> -->
+                                        <%= __('New guest note') %></a>
                                     <% } %>
                                     <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
-                                    <a class="fr-btn fr-btn--primary fr-btn--white" href="<%- serverURL %>/auth/oauth2"><%= __('Sign In') %></a>
+                                    <a class="fr-btn fr-btn--primary fr-btn--white fr-btn--sm" href="<%- serverURL %>/auth/oauth2"><%= __('Sign In') %></a>
                                     <% } %>
                                 </div>
                                 <div class="ui-signout" style="float: right; margin-top: 8px;<% if(!signin) { %> display: none;<% } %>">
