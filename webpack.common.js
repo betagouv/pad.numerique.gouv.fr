@@ -249,7 +249,7 @@ module.exports = {
       path.join(__dirname, 'public/css/slide-preview.css'),
       path.join(__dirname, 'public/css/header.min.css'),
       path.join(__dirname, 'public/css/logo.min.css'),
-      path.join(__dirname, 'public/css/custom.css')
+      // path.join(__dirname, 'public/css/custom.css')
     ],
     'index-styles-pack': [
       path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css'),
@@ -258,7 +258,7 @@ module.exports = {
       path.join(__dirname, 'node_modules/ionicons/css/ionicons.min.css'),
       path.join(__dirname, 'public/css/header.min.css'),
       path.join(__dirname, 'public/css/logo.min.css'),
-      path.join(__dirname, 'public/css/custom.css')
+      // path.join(__dirname, 'public/css/custom.css')
     ],
     'index-pack': [
       'babel-polyfill',

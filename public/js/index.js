@@ -84,6 +84,8 @@ require('../css/slide-preview.css')
 require('../css/site.css')
 
 require('highlight.js/styles/github-gist.css')
+require('../css/custom-note.css')
+
 
 let defaultTextHeight = 20
 let viewportMargin = 20
