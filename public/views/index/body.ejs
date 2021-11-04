@@ -142,7 +142,7 @@
                         <a href="#" class="btn btn-default ui-refresh-history" title="<%= __('Refresh history') %>"><i class="fa fa-refresh"></i></a>
                     </form>
                     <br>
-                    <h4 class="ui-nohistory" style="display:none; color: white;">
+                    <h4 class="ui-nohistory" style="display:none; color:">
                         <%= __('No history') %>
                     </h4>
                     <a href="#" class="btn btn-primary ui-import-from-browser" style="display:none;"><%= __('Import from browser') %></a>
@@ -154,6 +154,8 @@
                 <div class="mastfoot">
                     <div class="inner">
                         <select class="ui-locale"></select>
+                        <br>
+                        <br>
                         <p> 
                             <%- __('Powered by %s', '<a href="https://hedgedoc.org">HedgeDoc</a>') %> | <a href="<%- serverURL %>/s/release-notes" target="_blank" rel="noopener"><%= __('Releases') %></a> | <a href="<%- sourceURL %>" target="_blank" rel="noopener"><%= __('Source Code') %></a><% if(imprint) { %> | <a href="<%- serverURL %>/s/imprint" target="_blank" rel="noopener"><%= __('Imprint') %></a><% } %><% if(privacyStatement) { %> | <a href="<%- serverURL %>/s/privacy" target="_blank" rel="noopener"><%= __('Privacy') %></a><% } %><% if(termsOfUse) { %> | <a href="<%- serverURL %>/s/terms-of-use" target="_blank" rel="noopener"><%= __('Terms of Use') %></a><% } %>
                         </p>
