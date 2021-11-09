@@ -382,67 +382,52 @@
  
  @font-face {
    font-family: Marianne;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light.woff") format("woff");
+   src: url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light.woff2") format("woff2"),
+          url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light.woff") format("woff");
    font-weight: 300;
    font-style: normal;
  }
  
  @font-face {
    font-family: Marianne;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light_Italic.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light_Italic.woff") format("woff");
+   src: url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light_Italic.woff2") format("woff2"),
+          url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Light_Italic.woff") format("woff");
    font-weight: 300;
    font-style: italic;
  }
  
  @font-face {
    font-family: Marianne;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular.woff") format("woff");
+   src: url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular.woff2") format("woff2"),
+          url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular.woff") format("woff");
    font-weight: 400;
    font-style: normal;
  }
  
  @font-face {
    font-family: Marianne;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular_Italic.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular_Italic.woff") format("woff");
+   src: url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular_Italic.woff2") format("woff2"),
+          url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Regular_Italic.woff") format("woff");
    font-weight: 400;
    font-style: italic;
  }
  
  @font-face {
    font-family: Marianne;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold.woff") format("woff");
+   src: url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold.woff2") format("woff2"),
+          url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold.woff") format("woff");
    font-weight: 700;
    font-style: normal;
  }
  
  @font-face {
    font-family: Marianne;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold_Italic.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold_Italic.woff") format("woff");
+   src: url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold_Italic.woff2") format("woff2"),
+          url("../../node_modules/@gouvfr/dsfr/dist/fonts/Marianne-Bold_Italic.woff") format("woff");
    font-weight: 700;
    font-style: italic;
  }
  
- @font-face {
-   font-family: Spectral;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Spectral-Regular.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Spectral-Regular.woff") format("woff");
-   font-weight: 400;
-   font-style: normal;
- }
- 
- @font-face {
-   font-family: Spectral;
-   src: url("node_modules/@gouvfr/dsfr/dist/fonts/Spectral-ExtraBold.woff2") format("woff2"),
-          url("node_modules/@gouvfr/dsfr/dist/fonts/Spectral-ExtraBold.woff") format("woff");
-   font-weight: 900;
-   font-style: normal;
- }
  
  .fr-enlarge-link {
    position: relative;
