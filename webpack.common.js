@@ -153,7 +153,7 @@ module.exports = {
           globOptions: {
             dot: false
           },
-          to: '../fonts'
+          to: 'fonts/'
         },
         {
           context: path.join(__dirname, 'node_modules/emojify.js'),
