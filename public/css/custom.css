@@ -391,7 +391,7 @@
  @font-face {
    font-family: Marianne;
    src: url("../build/fonts/Marianne-Light_Italic.woff2") format("woff2"),
-          url("../fonts/Marianne-Light_Italic.woff") format("woff");
+          url("../build/fonts/Marianne-Light_Italic.woff") format("woff");
    font-weight: 300;
    font-style: italic;
  }
@@ -414,8 +414,8 @@
  
  @font-face {
    font-family: Marianne;
-   src: url("../fonts/Marianne-Bold.woff2") format("woff2"),
-          url("../fonts/Marianne-Bold.woff") format("woff");
+   src: url("../build/fonts/Marianne-Bold.woff2") format("woff2"),
+          url("../build/fonts/Marianne-Bold.woff") format("woff");
    font-weight: 700;
    font-style: normal;
  }
