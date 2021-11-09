@@ -1,3 +1,5 @@
+# Accessibilité
+
 ## Déclaration d'accessibilité
 
 La DINUM s’engage à rendre son service accessible, conformément à l’article 47 de la loi n° 2005-102 du 11 février 2005.
