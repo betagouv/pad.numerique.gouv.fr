@@ -379,7 +379,7 @@
  /**
   * Déclaration des fontes
   */
- 
+/*  
  @font-face {
    font-family: Marianne;
    src: url("../fonts/Marianne-Light.woff2") format("woff2"),
@@ -442,7 +442,7 @@
           url("../fonts/Spectral-ExtraBold.woff") format("woff");
    font-weight: 900;
    font-style: normal;
- }
+ } */
  
  .fr-enlarge-link {
    position: relative;
