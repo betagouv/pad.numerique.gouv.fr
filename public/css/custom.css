@@ -1,10 +1,3 @@
-
-.dinum-pad-title {
-  font-family: "Marianne", arial, sans-serif;
-  text-rendering: optimizeSpeed;
-  /* color: #383838; */
-}
-
 .fr-header {
   font-family: "Marianne", arial, sans-serif;
   text-rendering: optimizeSpeed;
@@ -16,8 +9,13 @@
   --block-color-active: rgba(194, 194, 194, 0.5);
   margin: 0;
   padding: 0;
+  color: var(--g700);
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+.fr-header__service a, .fr-header__service p {
+  color: var(--g700);
 }
 
 a:focus, a:hover {
