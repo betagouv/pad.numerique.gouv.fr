@@ -148,6 +148,14 @@ module.exports = {
           to: 'fonts/'
         },
         {
+          context: path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/fonts'),
+          from: '**/*',
+          globOptions: {
+            dot: false
+          },
+          to: '../fonts'
+        },
+        {
           context: path.join(__dirname, 'node_modules/emojify.js'),
           from: 'dist/**/*',
           globOptions: {
@@ -246,7 +254,6 @@ module.exports = {
       path.join(__dirname, 'public/css/mermaid.css'),
       path.join(__dirname, 'public/css/markdown.css'),
       path.join(__dirname, 'public/css/slide-preview.css'),
-      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/core.min.css'),
       path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/header.min.css'),
       path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/logo.min.css')
     ],
@@ -255,7 +262,6 @@ module.exports = {
       path.join(__dirname, 'node_modules/fork-awesome/css/fork-awesome.min.css'),
       path.join(__dirname, 'public/css/bootstrap-social.css'),
       path.join(__dirname, 'node_modules/ionicons/css/ionicons.min.css'),
-      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/core.min.css'),
       path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/header.min.css'),
       path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/logo.min.css')
     ],
