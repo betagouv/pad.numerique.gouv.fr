@@ -3,12 +3,12 @@
  */
 
 /* Links */
-/* 
-:not([class^="fr-"]) > a,
-:not([class^="fr-"]) > a:focus,
-:not([class^="fr-"]) > a:hover {
+
+a,
+a:focus,
+a:hover {
     color: #fff;
-} */
+}
 /* Custom default button */
 
 .btn-default,
@@ -42,7 +42,6 @@ body {
     display: table;
     width: 100%;
     height: 100vh;
-    text-align: center;
     /* For at least Firefox */
     min-height: 100%;
     -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
@@ -375,8 +374,4 @@ select {
 
 .cover-heading img {
     max-width: 100%;
-}
-
-html {
-    font-size: 16px;
 }
