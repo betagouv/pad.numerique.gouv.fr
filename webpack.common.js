@@ -148,6 +148,14 @@ module.exports = {
           to: 'fonts/'
         },
         {
+          context: path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/fonts'),
+          from: '**/*',
+          globOptions: {
+            dot: false
+          },
+          to: 'fonts/'
+        },
+        {
           context: path.join(__dirname, 'node_modules/emojify.js'),
           from: 'dist/**/*',
           globOptions: {
