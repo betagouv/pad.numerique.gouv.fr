@@ -17,7 +17,6 @@
                     <p class="fr-header__service-title">Notepad de l'État</p>
                     </a>
                     <p class="fr-header__service-tagline">Plateforme de notes collaboratives</p>
-                    <!-- <p class="fr-header__service-tagline">Pad numerique de l'etat</p> -->
                 </div>
                 </div>
             </div>
@@ -39,7 +38,6 @@
                                 <div class="ui-signin" style="float: right; margin-top: 8px;<% if(signin) { %> display: none;<% } %>">
                                     <% if (allowAnonymous) { %>
                                     <a type="button" href="<%- serverURL %>/new" class="fr-btn fr-btn--sm fr-btn--secondary fr-btn--white-outline fr-btn--icon-left fr-fi-add-line">
-                                        <!-- <i class="fa fa-plus"></i> -->
                                         <%= __('New guest note') %></a>
                                     <% } %>
                                     <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
@@ -68,49 +66,14 @@
                 <div id="home" class="section"<% if(signin) { %> style="display:none;"<% } %>>
                     <div class="inner cover">
                         <h1 class="cover-heading" style="color: white;">Notepad de l'État</h1>
-                        <!-- <h1 class="cover-heading"><img src="<%- serverURL %>/banner/banner_vertical_color.svg" width="400" alt="HedgeDoc logo"></h1> -->
                         <p class="lead" style="color: white;">
                             <%= __('Best way to write and share your knowledge in markdown.') %>
                         </p>
-                        <!-- <% if (infoMessage && infoMessage.length > 0) { %>
-                        <div class="alert alert-info" style="max-width: 400px; margin: 0 auto;"><%= infoMessage %></div>
-                        <% } %>
-                        <% if (errorMessage && errorMessage.length > 0) { %>
-                        <div class="alert alert-danger" style="max-width: 400px; margin: 0 auto;"><%= errorMessage %></div>
-                        <% } %>
-                        <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
-                        <span class="ui-signin">
-                            <br>
-                            <a type="button" class="btn btn-lg btn-success ui-signin" data-toggle="modal" data-target=".signin-modal" style="min-width: 200px;"><%= __('Sign In') %></a>
-                        </span>
-                        <span class="ui-or"><%= __('or') %></span>
-                        <% } %> -->
                         <span class="ui-signin">
                             <a type="button" href="<%- serverURL %>/apropos" class="fr-btn fr-btn--secondary fr-btn--white-outline" style="min-width: 200px;">Qu'est ce que le pad ?</a>
                             <br>
                             <br>
-                            <!-- <img src="<%- serverURL %>/screenshot.png" class="screenshot ui-signin"> -->
                         </span>
-                        <!-- <div class="lead row" style="width: 90%; margin: 0 auto;">
-                            <div class="col-md-4 inner">
-                                <a href="<%- serverURL %>/features#Share-Notes">
-                                    <i class="fa fa-bolt fa-3x"></i>
-                                    <h4><%= __('Collaborate with URL') %></h4>
-                                </a>
-                            </div>
-                            <div class="col-md-4 inner">
-                                <a href="<%- serverURL %>/features#MathJax">
-                                    <i class="fa fa-bar-chart fa-3x"></i>
-                                    <h4><%= __('Support charts and MathJax') %></h4>
-                                </a>
-                            </div>
-                            <div class="col-md-4 inner">
-                                <a href="<%- serverURL %>/features#Slide-Mode">
-                                    <i class="fa fa-tv fa-3x"></i>
-                                    <h4><%= __('Support slide mode') %></h4>
-                                </a>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
@@ -159,9 +122,6 @@
                         <p> 
                             <%- __('Powered by %s', '<a href="https://hedgedoc.org">HedgeDoc</a>') %> | <a href="<%- serverURL %>/s/release-notes" target="_blank" rel="noopener"><%= __('Releases') %></a> | <a href="<%- sourceURL %>" target="_blank" rel="noopener"><%= __('Source Code') %></a><% if(imprint) { %> | <a href="<%- serverURL %>/s/imprint" target="_blank" rel="noopener"><%= __('Imprint') %></a><% } %><% if(privacyStatement) { %> | <a href="<%- serverURL %>/s/privacy" target="_blank" rel="noopener"><%= __('Privacy') %></a><% } %><% if(termsOfUse) { %> | <a href="<%- serverURL %>/s/terms-of-use" target="_blank" rel="noopener"><%= __('Terms of Use') %></a><% } %>
                         </p>
-                        <!-- <h6 class="social-foot">
-                            <%- __('Follow us on %s and %s.', '<a href="https://github.com/hedgedoc/hedgedoc" target="_blank" rel="noopener"><i class="fa fa-github"></i> GitHub</a>, <a href="https://community.hedgedoc.org" target="_blank" rel="noopener"><i class="fa fa-users" aria-hidden="true"></i> Discourse</a>, <a href="https://chat.hedgedoc.org" target="_blank" rel="noopener"><i class="fa fa-comments"></i> Matrix</a>, <a href="https://social.hedgedoc.org/mastodon" target="_blank" rel="noopener"><i class="fa fa-mastodon"></i> Mastodon</a>', '<a href="https://translate.hedgedoc.org" target="_blank" rel="noopener"><i class="fa fa-globe"></i> POEditor</a>') %>
-                        </h6> -->
                     </div>
                 </div>
             </div>
@@ -203,21 +163,21 @@
               <li class="fr-footer__bottom-item">
                 
                   
-                  <a href="/terms-of-use" class="fr-footer__bottom-link">Mentions légales</a>
+                  <a href="/s/terms-of-use" class="fr-footer__bottom-link">Mentions légales</a>
                 
               </li>
                     
               <li class="fr-footer__bottom-item">
                 
                   
-                  <a href="/suivi/" class="fr-footer__bottom-link">Données personnelles et cookies</a>
+                  <a href="/s/suivi/" class="fr-footer__bottom-link">Données personnelles et cookies</a>
                 
               </li>
                     
               <li class="fr-footer__bottom-item">
                 
                   
-                  <a href="/accessibilite/" class="fr-footer__bottom-link">Accessibilité : non conforme</a>
+                  <a href="/s/accessibilite/" class="fr-footer__bottom-link">Accessibilité : non conforme</a>
                 
               </li>
             
