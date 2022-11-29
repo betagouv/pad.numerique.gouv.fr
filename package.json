@@ -11,10 +11,10 @@
     "markdownlint": "remark .",
     "mocha-suite": "NODE_ENV=test CMD_DB_URL=\"sqlite::memory:\" mocha --exit",
     "standard": "echo 'standard is no longer being used, use `npm run eslint` instead!' && exit 1",
-    "dev": "webpack --config webpack.dev.js --progress --watch",
+    "dev": "webpack --config webpack.dev.js --watch",
     "heroku-prebuild": "bin/heroku",
     "postinstall": "bin/heroku",
-    "build": "webpack --config webpack.prod.js --progress",
+    "build": "webpack --config webpack.prod.js",
     "start": "node app.js"
   },
   "dependencies": {
@@ -115,7 +115,7 @@
     "**/request": "^2.88.0"
   },
   "engines": {
-    "node": "=16.13.0"
+    "node": "=16.18.1"
   },
   "bugs": "https://github.com/hedgedoc/hedgedoc/issues",
   "keywords": [
@@ -135,7 +135,7 @@
       "url": "https://shivering-isles.com"
     },
     {
-      "name":"David Mehren",
+      "name": "David Mehren",
       "email": "hedgedoc@herrmehren.de"
     }
   ],
