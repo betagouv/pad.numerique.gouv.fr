@@ -11,7 +11,7 @@ Direction interministérielle du numérique
 Tél : 01 42 75 80 00
 
 ## Directeur de la publication
-Nadi Bou Hana - Directeur
+Stéphanie Schaer - Directrice
 
 ## Hébergement de la plateforme
 Ce site est hébergé par la société Scalingo : 
