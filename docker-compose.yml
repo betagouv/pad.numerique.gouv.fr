@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    image: betagouv-hedgedoc
+    build: .
+    environment:
+      - CMD_DB_URL=postgres://hedgedoc:password@db:5432/hedgedoc
+      - CMD_DOMAIN=localhost
+      - CMD_URL_ADDPORT=true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+  webpack:
+    image: betagouv-hedgedoc
+    command: 'npm run dev'
+    volumes:
+      - .:/app
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=hedgedoc
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=hedgedoc
+    volumes:
+      - database:/var/lib/postgresql/data
+volumes:
+  database:
