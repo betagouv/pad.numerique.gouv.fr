@@ -54,41 +54,5 @@
 
 /* BETA overrides for accessibility ==> */
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-    color: #1E1E1E;
-}
 
-.night .markdown-body h1,
-.night .markdown-body h5,
-.night .markdown-body h6 {
-    border-bottom-color: #ddd;
-}
-
-.markdown-body h1 {
-    padding-bottom: 0;
-    border-bottom: 5px solid rgb(0,0,145);
-    color: rgb(0,0,145);
-}
-
-.markdown-body h2 {
-    border-bottom: 3px solid #1E1E1E;
-    /* #F0F0F0 */
-}
-
-.markdown-body a {
-    color: rgb(0,0,145);
-}
-
-.ui-view-area a {
-    color: rgb(0,0,145);
-}
-
-.label-primary {
-    background-color: rgb(0,0,145);
-}
 /* <== BETA overrides for accessibility */

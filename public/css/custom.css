@@ -23,6 +23,15 @@ a:focus, a:hover {
   text-decoration: none;
 }
 
+.fr-footer__content-link:hover{
+  text-decoration: underline;
+  color:black;
+}
+.fr-footer__bottom-link:hover {
+  text-decoration: underline;
+  color:black;
+}
+
 [href] {
   box-shadow: none;
 }
