@@ -13,6 +13,7 @@ services:
       - db
     volumes:
       - .:/app
+      - /app/node_modules/
   webpack:
     image: betagouv-hedgedoc
     command: 'npm run dev'
