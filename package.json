@@ -115,7 +115,7 @@
     "**/request": "^2.88.0"
   },
   "engines": {
-    "node": "=16.18.1"
+    "node": "^16.x"
   },
   "bugs": "https://github.com/hedgedoc/hedgedoc/issues",
   "keywords": [
