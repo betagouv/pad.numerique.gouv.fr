@@ -4,7 +4,7 @@
       "directives": {
         "defaultSrc": ["'self'"],
         "imgSrc": ["data:"],
-        "fontSrc": ["data:"]
+        "fontSrc": ["data:", "moncomptepro.beta.gouv.fr"]
       }
     },
     "db": {
@@ -23,7 +23,7 @@
       "directives": {
         "defaultSrc": ["'self'"],
         "imgSrc": ["data:"],
-        "fontSrc": ["data:"]
+        "fontSrc": ["data:", "moncomptepro.beta.gouv.fr"]
       }
     }
   }
