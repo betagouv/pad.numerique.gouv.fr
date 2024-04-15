@@ -199,10 +199,13 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
   html += `
     <button id="close-overlay">X</button>
   `
-  
-  // Add a short message if available, ex: 'Faute de frappe'
-  if (match.shortMessage) {
-    html += `<p><strong>${match.shortMessage}</strong></p>`;
+
+  // Add a title if available, ex: 'Faute de frappe'
+  const shortMessage = match.shortMessage;
+  const ruleName = match.rule && match.rule.category && match.rule.category.name ;
+  const title = shortMessage || ruleName;
+  if (title) {
+    html += `<p><strong>${title}</strong></p>`;
   }
 
   // Add a descriptive message about the match
