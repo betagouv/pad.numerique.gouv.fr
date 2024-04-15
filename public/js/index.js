@@ -85,6 +85,7 @@ import Editor from './lib/editor'
 import getUIElements from './lib/editor/ui-elements'
 import modeType from './lib/modeType'
 import appState from './lib/appState'
+import {SpellChecker, TYPING_TIMEOUT_DURATION} from "./lib/spell-checker/spell-checker";
 
 require('../vendor/showup/showup')
 
@@ -3271,7 +3272,13 @@ editorInstance.on('cut', function () {
 editorInstance.on('paste', function () {
   // na
 })
+let typingTimeout;
 editorInstance.on('changes', function (editor, changes) {
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(function() {
+    SpellChecker.fetchData(editor)
+  }, TYPING_TIMEOUT_DURATION);
+
   updateHistory()
   const docLength = editor.getValue().length
   // workaround for big documents

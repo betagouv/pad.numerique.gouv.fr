@@ -9,10 +9,17 @@
  * https://github.com/sparksuite/codemirror-spell-checker/blob/master/src/js/spell-checker.js
  */
 
+import {
+  debug,
+  spellCheckerEndpoint,
+} from '../config'
+
 import '../../../css/spell-checker.css'
 
+// SpellChecker configurations
 const SPELLING_ERRORS_TYPES = ["misspelling"]
 const BASE_STYLE_CSS_CLASS = "spell-check"
+export const TYPING_TIMEOUT_DURATION = 500
 
 export function SpellChecker(mode, codeMirrorInstance) {
 
@@ -76,5 +83,59 @@ export function SpellChecker(mode, codeMirrorInstance) {
 
 SpellChecker.data = null;
 SpellChecker.isFetching = null;
+SpellChecker._overlay = null;
+SpellChecker._openMatch = null;
 
 
+/**
+ * Fetches data from the LanguageTool HTTP server via the specified endpoint
+ * to check the content of the editor.
+ *
+ * @param {object} editor - The CodeMirror editor instance.
+ */
+SpellChecker.fetchData = (editor) => {
+  if (!spellCheckerEndpoint) {
+    console.log("CodeMirror Spell Checker: You must provide a spell-checker endpoint via the config `spellcheckerEndpoint`");
+    return
+  }
+  // FIXME: Consider making the mode configurable rather than hardcoding it
+  editor.setOption('mode', 'gfm')
+
+  SpellChecker.isFetching = true;
+  SpellChecker.data = null;
+
+  // FIXME: Proxy request through backend for better security and control
+  fetch(spellCheckerEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams({
+      text: editor.getValue(),
+      language: 'fr',
+    })
+  })
+    .then(async (response) => {
+      const data = await response.json();
+      // LanguageTool returns an offset, but CodeMirror needs a line and character position
+      data.matches = data.matches.map((match) => {
+        // Convert global offset to line and character position
+        return Object.assign({}, match, {
+          position: editor.posFromIndex(match.offset),
+        });
+      })
+      if (debug) {
+        console.debug(data)
+      }
+      SpellChecker.data = data
+      SpellChecker.isFetching = false;
+      // FIXME: Consider making the mode configurable rather than hardcoding it
+      editor.setOption('mode', 'spell-checker');
+    })
+    .catch((err) => {
+      if (debug) {
+        console.debug(err)
+      }
+      SpellChecker.isFetching = false;
+    })
+}
