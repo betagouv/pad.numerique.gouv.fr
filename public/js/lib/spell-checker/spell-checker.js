@@ -18,8 +18,8 @@ import '../../../css/spell-checker.css'
 
 // SpellChecker configurations
 const SPELLING_ERRORS_TYPES = ["misspelling"]
-const BASE_STYLE_CSS_CLASS = "spell-check"
 export const TYPING_TIMEOUT_DURATION = 500
+const BASE_STYLE_CSS_CLASS = "spell-check";
 
 export function SpellChecker(mode, codeMirrorInstance) {
 
@@ -53,6 +53,8 @@ export function SpellChecker(mode, codeMirrorInstance) {
           return null;
         }
 
+        state.match = match;
+
         for (let step = 0; step < match.length; step++) {
           stream.next();
           state.charCount++;
@@ -66,7 +68,7 @@ export function SpellChecker(mode, codeMirrorInstance) {
 
       },
       startState: function() {
-        return { lineCount: 0, charCount: 0};
+        return { lineCount: 0, charCount: 0, match: null};
       },
       blankLine: function(state) {
         state.lineCount++;
@@ -138,4 +140,8 @@ SpellChecker.fetchData = (editor) => {
       }
       SpellChecker.isFetching = false;
     })
+}
+
+SpellChecker.hasError = (token) => {
+  return token && token.state && token.state.overlayCur && token.state.overlayCur.includes(BASE_STYLE_CSS_CLASS)
 }

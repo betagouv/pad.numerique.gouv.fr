@@ -3319,6 +3319,16 @@ const cursorActivity = _.debounce(cursorActivityInner, cursorActivityDebounce)
 
 function cursorActivityInner (editor) {
   if (editorHasFocus() && !Visibility.hidden()) {
+
+    const cursorPosition = editor.getCursor();
+    const token = editor.getTokenAt(cursorPosition);
+
+    if (SpellChecker.hasError(token)) {
+      const match = token.state.overlay.match
+      //  TODO: opens an overlay with this data
+      console.log(match);
+    }
+
     for (let i = 0; i < onlineUsers.length; i++) {
       if (onlineUsers[i].id === personalInfo.id) {
         onlineUsers[i].cursor = editor.getCursor()
