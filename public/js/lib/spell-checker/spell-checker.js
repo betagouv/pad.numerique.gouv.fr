@@ -226,3 +226,7 @@ SpellChecker.closeOverlay = () => {
     SpellChecker._openMatch = null;
   }
 }
+
+window.addEventListener('resize', function() {
+  SpellChecker.closeOverlay();
+});
