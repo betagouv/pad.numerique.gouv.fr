@@ -148,6 +148,36 @@ SpellChecker.hasError = (token) => {
   return token && token.state && token.state.overlayCur && token.state.overlayCur.includes(BASE_STYLE_CSS_CLASS)
 }
 
+SpellChecker.getOverlayPosition = (cursorPosition) => {
+  const bottomSpace = window.innerHeight - cursorPosition.bottom;
+  const rightSpace = window.innerWidth - cursorPosition.right;
+
+  // By default, the overlay is positioned at the bottom-right of the cursor
+  let top = cursorPosition.top;
+  let left = cursorPosition.left;
+
+  // FIXME: hardcoded values
+  const overlay = {
+    width: 300,
+    height: 162,
+  }
+
+  // If there is limited space at the bottom, position the overlay on the top
+  if(bottomSpace < overlay.height) {
+    top -= overlay.height + 10
+  } else {
+    // FIXME: arbitrary hardcoded value to open overlay slightly under the cursor
+    top += 30  // Assuming a standard lineheight
+  }
+
+  // If there is limited space at the right, position the overlay on the left side
+  if (rightSpace < overlay.width) {
+    left -= overlay.width;
+  }
+
+  return {top, left};
+}
+
 /**
  * Open an overlay to display information about the selected match.
  *
@@ -191,9 +221,9 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
   overlay.innerHTML = html;
 
   // Position the overlay
-  overlay.style.left = position.left + "px";
-  // FIXME: arbitrary hardcoded value to open overlay slightly under the cursor
-  overlay.style.top = position.top + 30 + "px";
+  const {top, left} = SpellChecker.getOverlayPosition(position)
+  overlay.style.left = `${left}px`;
+  overlay.style.top = `${top}px`;
 
   // Handle click interactions
   overlay.addEventListener('click', function(event) {
