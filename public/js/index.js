@@ -3314,6 +3314,9 @@ editorInstance.on('focus', function (editor) {
   personalInfo.cursor = editor.getCursor()
   socket.emit('cursor focus', editor.getCursor())
 })
+editorInstance.on('scroll', function(editor) {
+  SpellChecker.closeOverlay();
+})
 
 const cursorActivity = _.debounce(cursorActivityInner, cursorActivityDebounce)
 
