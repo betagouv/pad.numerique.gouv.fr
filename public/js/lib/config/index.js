@@ -10,6 +10,4 @@ window.serverurl = serverurl
 export const noteid = decodeURIComponent(urlpath ? window.location.pathname.slice(urlpath.length + 1, window.location.pathname.length).split('/')[1] : window.location.pathname.split('/')[1])
 export const noteurl = `${serverurl}/${noteid}`
 
-export const spellCheckerEndpoint = 'https://api.languagetool.org/v2/check' || ''
-
 export const version = window.version

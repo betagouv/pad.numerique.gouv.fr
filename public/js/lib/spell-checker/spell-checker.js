@@ -11,7 +11,7 @@
 
 import {
   debug,
-  spellCheckerEndpoint,
+  serverurl,
 } from '../config'
 
 import '../../../css/spell-checker.css'
@@ -99,29 +99,18 @@ SpellChecker._openMatch = null;
  * @param {object} editor - The CodeMirror editor instance.
  */
 SpellChecker.fetchData = (editor) => {
-  if (!spellCheckerEndpoint) {
-    console.log("CodeMirror Spell Checker: You must provide a spell-checker endpoint via the config `spellcheckerEndpoint`");
-    return
-  }
+
   // FIXME: Consider making the mode configurable rather than hardcoding it
   editor.setOption('mode', 'gfm')
 
   SpellChecker.isFetching = true;
   SpellChecker.data = null;
 
-  // FIXME: Proxy request through backend for better security and control
-  fetch(spellCheckerEndpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: new URLSearchParams({
-      text: editor.getValue(),
-      language: 'fr',
-    })
+  $.post(`${serverurl}/check/`, {
+    text: editor.getValue(),
+    language: 'fr',
   })
-    .then(async (response) => {
-      const data = await response.json();
+    .done(data => {
       // LanguageTool returns an offset, but CodeMirror needs a line and character position
       data.matches = data.matches.map((match) => {
         // Convert global offset to line and character position
@@ -137,10 +126,12 @@ SpellChecker.fetchData = (editor) => {
       // FIXME: Consider making the mode configurable rather than hardcoding it
       editor.setOption('mode', 'spell-checker');
     })
-    .catch((err) => {
+    .fail((err) => {
       if (debug) {
         console.debug(err)
       }
+    })
+    .always(() => {
       SpellChecker.isFetching = false;
     })
 }
