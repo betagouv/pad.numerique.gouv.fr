@@ -547,6 +547,8 @@ export default class Editor {
   }
 
   setSpellcheck () {
+    const spellcheckToggle = this.statusSpellcheck.find('.ui-spellcheck-toggle')
+
     const cookieSpellcheck = Cookies.get('spellcheck')
     if (cookieSpellcheck) {
       let mode = null
@@ -557,18 +559,13 @@ export default class Editor {
         mode = defaultEditorMode
       }
       if (mode && mode !== this.editor.getOption('mode')) {
-        this.editor.setOption('mode', mode)
-      }
-    }
-
-    const spellcheckToggle = this.statusSpellcheck.find('.ui-spellcheck-toggle')
-
-    const checkSpellcheck = () => {
-      const mode = this.editor.getOption('mode')
-      if (mode === defaultEditorMode) {
-        spellcheckToggle.removeClass('active')
-      } else {
-        spellcheckToggle.addClass('active')
+        if (mode === defaultEditorMode) {
+          spellcheckToggle.removeClass('active')
+          this.editor.setOption('mode', mode)
+        } else {
+          SpellChecker.fetchData(this.editor)
+          spellcheckToggle.addClass('active')
+        }
       }
     }
 
@@ -581,18 +578,21 @@ export default class Editor {
         mode = defaultEditorMode
       }
       if (mode && mode !== this.editor.getOption('mode')) {
-        this.editor.setOption('mode', mode)
+        if (mode === defaultEditorMode) {
+          spellcheckToggle.removeClass('active')
+          this.editor.setOption('mode', mode)
+        } else {
+          SpellChecker.fetchData(this.editor)
+          spellcheckToggle.addClass('active')
+        }
       }
       Cookies.set('spellcheck', mode === 'spell-checker', {
         expires: 365,
         sameSite: window.cookiePolicy,
         secure: window.location.protocol === 'https:'
       })
-
-      checkSpellcheck()
     })
 
-    checkSpellcheck()
 
     // workaround spellcheck might not activate beacuse the ajax loading
     if (window.num_loaded < 2) {
