@@ -3326,7 +3326,15 @@ function cursorActivityInner (editor) {
     if (SpellChecker.hasError(token)) {
       const match = token.state.overlay.match
       const cursorCoords = editor.cursorCoords();
-      SpellChecker.openOverlay(match, cursorCoords);
+      // Replace the match with the selected suggestion
+      const replaceTextMatch = (newValue) => {
+        editor.replaceRange(
+          newValue,
+          match.position, // Start position of the match
+          { line: match.position.line, ch: match.position.ch + match.length } // End position of the match
+        );
+      }
+      SpellChecker.openOverlay(match, cursorCoords, replaceTextMatch);
     } else {
       SpellChecker.closeOverlay()
     }

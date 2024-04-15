@@ -154,7 +154,7 @@ SpellChecker.hasError = (token) => {
  * @param {object} match - The match object containing details about the detected issue.
  * @param {object} position - The position object specifying where to open the overlay.
  */
-SpellChecker.openOverlay = (match, position) => {
+SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
 
   SpellChecker.closeOverlay();
 
@@ -198,6 +198,10 @@ SpellChecker.openOverlay = (match, position) => {
   // Handle click interactions
   overlay.addEventListener('click', function(event) {
     if (event.target.id === "close-overlay") {
+      SpellChecker.closeOverlay();
+    }
+    if (event.target.tagName === "LI") {
+      onReplacementSelection(event.target.textContent);
       SpellChecker.closeOverlay();
     }
   });
