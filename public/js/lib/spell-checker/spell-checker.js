@@ -238,7 +238,3 @@ SpellChecker.reset = () => {
   SpellChecker._overlay = null;
   SpellChecker._openMatch = null;
 }
-
-window.addEventListener('resize', function() {
-  SpellChecker.closeOverlay();
-});

@@ -1039,7 +1039,6 @@ function changeMode (type) {
   ui.area.edit.removeClass(responsiveClass)
   ui.area.view.removeClass(scrollClass)
   ui.area.view.removeClass(responsiveClass)
-  SpellChecker.closeOverlay()
   switch (appState.currentMode) {
     case modeType.edit:
       ui.area.edit.show()
@@ -3319,6 +3318,12 @@ editorInstance.on('focus', function (editor) {
   socket.emit('cursor focus', editor.getCursor())
 })
 editorInstance.on('scroll', function(editor) {
+  SpellChecker.closeOverlay();
+})
+editorInstance.on('refresh', function(editor) {
+  // Close the overlay when the editor is refreshed or resized.
+  // This event is useful for invalidating cached values
+  // that depend on the editor or character size, as mentioned in the documentation.
   SpellChecker.closeOverlay();
 })
 
