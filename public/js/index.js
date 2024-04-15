@@ -3275,6 +3275,9 @@ editorInstance.on('paste', function () {
 })
 let typingTimeout;
 editorInstance.on('changes', function (editor, changes) {
+
+  SpellChecker.closeOverlay();
+
   clearTimeout(typingTimeout);
   typingTimeout = setTimeout(function() {
     SpellChecker.fetchData(editor)
