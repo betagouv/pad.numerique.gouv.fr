@@ -15,6 +15,7 @@ import {
 } from '../config'
 
 import '../../../css/spell-checker.css'
+import config from '../editor/config';
 
 // SpellChecker configurations
 const SPELLING_ERRORS_TYPES = ["misspelling"]
@@ -100,8 +101,7 @@ SpellChecker._openMatch = null;
  */
 SpellChecker.fetchData = (editor) => {
 
-  // FIXME: Consider making the mode configurable rather than hardcoding it
-  editor.setOption('mode', 'gfm')
+  editor.setOption('mode', config.defaultMode)
 
   SpellChecker.isFetching = true;
   SpellChecker.data = null;
@@ -123,8 +123,7 @@ SpellChecker.fetchData = (editor) => {
       }
       SpellChecker.data = data
       SpellChecker.isFetching = false;
-      // FIXME: Consider making the mode configurable rather than hardcoding it
-      editor.setOption('mode', 'spell-checker');
+      editor.setOption('mode', config.spellCheckerMode);
     })
     .fail((err) => {
       if (debug) {

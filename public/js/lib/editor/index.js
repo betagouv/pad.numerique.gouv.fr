@@ -93,7 +93,7 @@ import '../../../css/ui/toolbar.css'
 
 /* config section */
 const isMac = CodeMirror.keyMap.default === CodeMirror.keyMap.macDefault
-const defaultEditorMode = 'gfm'
+const defaultEditorMode = config.defaultMode
 const viewportMargin = 20
 
 const jumpToAddressBarKeymapName = isMac ? 'Cmd-L' : 'Ctrl-L'
@@ -553,7 +553,7 @@ export default class Editor {
     if (cookieSpellcheck) {
       let mode = null
       if (cookieSpellcheck === 'true' || cookieSpellcheck === true) {
-        mode = 'spell-checker'
+        mode = config.spellCheckerMode
       } else {
         SpellChecker.reset()
         mode = defaultEditorMode
@@ -572,7 +572,7 @@ export default class Editor {
     spellcheckToggle.click(() => {
       let mode = this.editor.getOption('mode')
       if (mode === defaultEditorMode) {
-        mode = 'spell-checker'
+        mode = config.spellCheckerMode
       } else {
         SpellChecker.reset()
         mode = defaultEditorMode
@@ -586,7 +586,7 @@ export default class Editor {
           spellcheckToggle.addClass('active')
         }
       }
-      Cookies.set('spellcheck', mode === 'spell-checker', {
+      Cookies.set('spellcheck', mode === config.spellCheckerMode, {
         expires: 365,
         sameSite: window.cookiePolicy,
         secure: window.location.protocol === 'https:'
@@ -599,8 +599,8 @@ export default class Editor {
       const spellcheckTimer = setInterval(
         () => {
           if (window.num_loaded >= 2) {
-            if (this.editor.getOption('mode') === 'spell-checker') {
-              this.editor.setOption('mode', 'spell-checker')
+            if (this.editor.getOption('mode') === config.spellCheckerMode) {
+              this.editor.setOption('mode', config.spellCheckerMode)
             }
             clearInterval(spellcheckTimer)
           }
@@ -664,7 +664,7 @@ export default class Editor {
 
   init (textit) {
 
-    SpellChecker("spell-checker", CodeMirror)
+    SpellChecker(config.spellCheckerMode, CodeMirror)
 
     this.editor = CodeMirror.fromTextArea(textit, {
       mode: defaultEditorMode,

@@ -86,6 +86,7 @@ import getUIElements from './lib/editor/ui-elements'
 import modeType from './lib/modeType'
 import appState from './lib/appState'
 import {SpellChecker, TYPING_TIMEOUT_DURATION, DELETE_DOUBLE_SPACE_VALUE} from "./lib/spell-checker/spell-checker";
+import config from './lib/editor/config';
 
 require('../vendor/showup/showup')
 
@@ -3276,7 +3277,7 @@ let typingTimeout;
 editorInstance.on('changes', function (editor, changes) {
 
   // Fetch data only if the spell-checker mode is activated
-  if (editor.getOption('mode') === 'spell-checker') {
+  if (editor.getOption('mode') === config.spellCheckerMode) {
     // Close the overlay if it's open
     SpellChecker.closeOverlay();
 
