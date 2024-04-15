@@ -3275,12 +3275,20 @@ editorInstance.on('paste', function () {
 let typingTimeout;
 editorInstance.on('changes', function (editor, changes) {
 
-  SpellChecker.closeOverlay();
+  // Fetch data only if the spell-checker mode is activated
+  if (editor.getOption('mode') === 'spell-checker') {
+    // Close the overlay if it's open
+    SpellChecker.closeOverlay();
 
-  clearTimeout(typingTimeout);
-  typingTimeout = setTimeout(function() {
-    SpellChecker.fetchData(editor)
-  }, TYPING_TIMEOUT_DURATION);
+    // Reset the typing timeout
+    clearTimeout(typingTimeout);
+
+    // Fetch new data after a duration without any new characters typed
+    typingTimeout = setTimeout(function() {
+      SpellChecker.fetchData(editor)
+    }, TYPING_TIMEOUT_DURATION);
+  }
+
 
   updateHistory()
   const docLength = editor.getValue().length
