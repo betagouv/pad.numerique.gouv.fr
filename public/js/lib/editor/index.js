@@ -79,7 +79,7 @@ import '@hedgedoc/codemirror-5/mode/vhdl/vhdl.js'
 import '@hedgedoc/codemirror-5/mode/xml/xml.js'
 import '@hedgedoc/codemirror-5/mode/yaml-frontmatter/yaml-frontmatter.js'
 import '@hedgedoc/codemirror-5/mode/yaml/yaml.js'
-import '../../../vendor/codemirror-spell-checker/spell-checker.min.js'
+import {SpellChecker} from '../spell-checker/spell-checker.js'
 
 import '../../../vendor/inlineAttachment/inline-attachment'
 import '../../../vendor/inlineAttachment/codemirror.inline-attachment'
@@ -661,6 +661,9 @@ export default class Editor {
   }
 
   init (textit) {
+
+    SpellChecker("spell-checker", CodeMirror)
+
     this.editor = CodeMirror.fromTextArea(textit, {
       mode: defaultEditorMode,
       backdrop: defaultEditorMode,

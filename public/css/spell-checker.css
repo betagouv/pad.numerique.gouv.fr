@@ -1,0 +1,12 @@
+/**
+ * Spell-checker Error and Warning Styling Documentation.
+ * Applied within CodeMirror for visual cues during text editing.
+ */
+
+.CodeMirror .cm-spell-check-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word){
+  border-bottom:2px dotted rgba(255,0,0,.8)
+}
+
+.CodeMirror .cm-spell-check-warning:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word){
+  border-bottom:2px dotted rgba(255,0128,0,.8)
+}
