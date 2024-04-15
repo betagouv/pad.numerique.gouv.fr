@@ -156,6 +156,8 @@ SpellChecker.hasError = (token) => {
  */
 SpellChecker.openOverlay = (match, position) => {
 
+  SpellChecker.closeOverlay();
+
   // Create the overlay element
   const overlay = document.createElement("div");
   overlay.className = "spell-check-overlay";
