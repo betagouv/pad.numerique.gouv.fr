@@ -21,6 +21,7 @@ const SPELLING_ERRORS_TYPES = ["misspelling"]
 const MAXIMUM_NUMBER_OF_REPLACEMENTS = 5;
 const BASE_STYLE_CSS_CLASS = "spell-check";
 export const TYPING_TIMEOUT_DURATION = 500;
+export const DELETE_DOUBLE_SPACE_VALUE = "Supprimer les doubles espaces"
 
 export function SpellChecker(mode, codeMirrorInstance) {
 
@@ -212,7 +213,8 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
     html += "<p>Suggestions :</p>";
     html += "<ul>";
     match.replacements.slice(0, MAXIMUM_NUMBER_OF_REPLACEMENTS).forEach((replacement) => {
-      html += `<li>${replacement.value}</li>`;
+      const value = replacement.value === " " ? DELETE_DOUBLE_SPACE_VALUE : replacement.value;
+      html += `<li>${value}</li>`;
     })
     html += "</ul>";
   }

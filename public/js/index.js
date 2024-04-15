@@ -85,7 +85,7 @@ import Editor from './lib/editor'
 import getUIElements from './lib/editor/ui-elements'
 import modeType from './lib/modeType'
 import appState from './lib/appState'
-import {SpellChecker, TYPING_TIMEOUT_DURATION} from "./lib/spell-checker/spell-checker";
+import {SpellChecker, TYPING_TIMEOUT_DURATION, DELETE_DOUBLE_SPACE_VALUE} from "./lib/spell-checker/spell-checker";
 
 require('../vendor/showup/showup')
 
@@ -3347,7 +3347,8 @@ function cursorActivityInner (editor) {
       const match = token.state.overlay.match
       const cursorCoords = editor.cursorCoords();
       // Replace the match with the selected suggestion
-      const replaceTextMatch = (newValue) => {
+      const replaceTextMatch = (value) => {
+        const newValue = value === DELETE_DOUBLE_SPACE_VALUE ? " ": value;
         editor.replaceRange(
           newValue,
           match.position, // Start position of the match
