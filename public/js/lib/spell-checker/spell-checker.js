@@ -227,6 +227,18 @@ SpellChecker.closeOverlay = () => {
   }
 }
 
+SpellChecker.reset = () => {
+
+  // Close the overlay if open
+  SpellChecker.closeOverlay();
+
+  // Reset SpellChecker's state
+  SpellChecker.data = null;
+  SpellChecker.isFetching = null;
+  SpellChecker._overlay = null;
+  SpellChecker._openMatch = null;
+}
+
 window.addEventListener('resize', function() {
   SpellChecker.closeOverlay();
 });

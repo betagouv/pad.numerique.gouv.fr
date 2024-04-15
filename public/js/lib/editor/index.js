@@ -553,6 +553,7 @@ export default class Editor {
       if (cookieSpellcheck === 'true' || cookieSpellcheck === true) {
         mode = 'spell-checker'
       } else {
+        SpellChecker.reset()
         mode = defaultEditorMode
       }
       if (mode && mode !== this.editor.getOption('mode')) {
@@ -576,6 +577,7 @@ export default class Editor {
       if (mode === defaultEditorMode) {
         mode = 'spell-checker'
       } else {
+        SpellChecker.reset()
         mode = defaultEditorMode
       }
       if (mode && mode !== this.editor.getOption('mode')) {
