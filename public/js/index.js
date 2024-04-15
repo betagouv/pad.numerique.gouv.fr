@@ -1039,6 +1039,7 @@ function changeMode (type) {
   ui.area.edit.removeClass(responsiveClass)
   ui.area.view.removeClass(scrollClass)
   ui.area.view.removeClass(responsiveClass)
+  SpellChecker.closeOverlay()
   switch (appState.currentMode) {
     case modeType.edit:
       ui.area.edit.show()
