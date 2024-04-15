@@ -18,8 +18,9 @@ import '../../../css/spell-checker.css'
 
 // SpellChecker configurations
 const SPELLING_ERRORS_TYPES = ["misspelling"]
-export const TYPING_TIMEOUT_DURATION = 500
+const MAXIMUM_NUMBER_OF_REPLACEMENTS = 5;
 const BASE_STYLE_CSS_CLASS = "spell-check";
+export const TYPING_TIMEOUT_DURATION = 500;
 
 export function SpellChecker(mode, codeMirrorInstance) {
 
@@ -85,6 +86,7 @@ export function SpellChecker(mode, codeMirrorInstance) {
 
 SpellChecker.data = null;
 SpellChecker.isFetching = null;
+SpellChecker.hasError = null;
 SpellChecker._overlay = null;
 SpellChecker._openMatch = null;
 
@@ -144,4 +146,52 @@ SpellChecker.fetchData = (editor) => {
 
 SpellChecker.hasError = (token) => {
   return token && token.state && token.state.overlayCur && token.state.overlayCur.includes(BASE_STYLE_CSS_CLASS)
+}
+
+/**
+ * Open an overlay to display information about the selected match.
+ *
+ * @param {object} match - The match object containing details about the detected issue.
+ * @param {object} position - The position object specifying where to open the overlay.
+ */
+SpellChecker.openOverlay = (match, position) => {
+
+  // Create the overlay element
+  const overlay = document.createElement("div");
+  overlay.className = "spell-check-overlay";
+
+  let html = '';
+
+  // Add a short message if available, ex: 'Faute de frappe'
+  if (match.shortMessage) {
+    html += `<p><strong>${match.shortMessage}</strong></p>`;
+  }
+
+  // Add a descriptive message about the match
+  html += `<p>${match.message}</p>`;
+
+  // Add suggestions to fix the match, if available
+  if (match.replacements && match.replacements.length > 0) {
+    html += "<p>Suggestions :</p>";
+    html += "<ul>";
+    match.replacements.slice(0, MAXIMUM_NUMBER_OF_REPLACEMENTS).forEach((replacement) => {
+      html += `<li>${replacement.value}</li>`;
+    })
+    html += "</ul>";
+  }
+
+  // Set the HTML content of the overlay
+  overlay.innerHTML = html;
+
+  // Position the overlay
+  overlay.style.left = position.left + "px";
+  // FIXME: arbitrary hardcoded value to open overlay slightly under the cursor
+  overlay.style.top = position.top + 30 + "px";
+
+  // Store the overlay and the open match in SpellChecker for later reference
+  SpellChecker._overlay = overlay;
+  SpellChecker._openMatch = match;
+
+  // Append the overlay to the document body
+  document.body.appendChild(overlay);
 }

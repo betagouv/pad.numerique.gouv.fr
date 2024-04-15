@@ -3325,8 +3325,8 @@ function cursorActivityInner (editor) {
 
     if (SpellChecker.hasError(token)) {
       const match = token.state.overlay.match
-      //  TODO: opens an overlay with this data
-      console.log(match);
+      const cursorCoords = editor.cursorCoords();
+      SpellChecker.openOverlay(match, cursorCoords);
     }
 
     for (let i = 0; i < onlineUsers.length; i++) {
