@@ -164,6 +164,11 @@ SpellChecker.openOverlay = (match, position) => {
 
   let html = '';
 
+  // Add a close button
+  html += `
+    <button id="close-overlay">X</button>
+  `
+  
   // Add a short message if available, ex: 'Faute de frappe'
   if (match.shortMessage) {
     html += `<p><strong>${match.shortMessage}</strong></p>`;
@@ -189,6 +194,13 @@ SpellChecker.openOverlay = (match, position) => {
   overlay.style.left = position.left + "px";
   // FIXME: arbitrary hardcoded value to open overlay slightly under the cursor
   overlay.style.top = position.top + 30 + "px";
+
+  // Handle click interactions
+  overlay.addEventListener('click', function(event) {
+    if (event.target.id === "close-overlay") {
+      SpellChecker.closeOverlay();
+    }
+  });
 
   // Store the overlay and the open match in SpellChecker for later reference
   SpellChecker._overlay = overlay;
