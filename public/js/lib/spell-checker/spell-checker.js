@@ -195,3 +195,16 @@ SpellChecker.openOverlay = (match, position) => {
   // Append the overlay to the document body
   document.body.appendChild(overlay);
 }
+
+SpellChecker.closeOverlay = () => {
+  // Get the current overlay
+  const overlay = SpellChecker._overlay;
+
+  // Close the overlay if open
+  if (overlay) {
+    overlay.parentNode.removeChild(overlay);
+    // Clear SpellChecker's state
+    SpellChecker._overlay = null;
+    SpellChecker._openMatch = null;
+  }
+}

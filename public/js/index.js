@@ -3327,6 +3327,8 @@ function cursorActivityInner (editor) {
       const match = token.state.overlay.match
       const cursorCoords = editor.cursorCoords();
       SpellChecker.openOverlay(match, cursorCoords);
+    } else {
+      SpellChecker.closeOverlay()
     }
 
     for (let i = 0; i < onlineUsers.length; i++) {
