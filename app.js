@@ -219,7 +219,9 @@ app.locals.authProviders = {
   oauth2ProviderName: config.oauth2.providerName,
   openID: config.isOpenIDEnable,
   email: config.isEmailEnable && !config.isEmailEnableForBotOnly,
-  allowEmailRegister: config.allowEmailRegister
+  allowEmailRegister: config.allowEmailRegister,
+  agentConnect: config.isAgentConnectEnable,
+  agentConnectName: config.agentConnect.providerName
 }
 
 // Export/Import menu items
