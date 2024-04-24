@@ -3278,6 +3278,10 @@ editorInstance.on('changes', function (editor, changes) {
 
   // Fetch data only if the spell-checker mode is activated
   if (editor.getOption('mode') === config.spellCheckerMode) {
+
+    // If any pending request, abort it
+    SpellChecker.abortFetchData();
+
     // Close the overlay if it's open
     SpellChecker.closeOverlay();
 

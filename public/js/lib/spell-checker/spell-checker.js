@@ -89,6 +89,7 @@ export function SpellChecker(mode, codeMirrorInstance) {
 SpellChecker.data = null;
 SpellChecker._overlay = null;
 SpellChecker._openMatch = null;
+SpellChecker.currentRequest = null;
 
 
 /**
@@ -99,7 +100,7 @@ SpellChecker._openMatch = null;
  */
 SpellChecker.fetchData = (editor) => {
 
-  $.post(`${serverurl}/check/`, {
+  SpellChecker.currentRequest = $.post(`${serverurl}/check/`, {
     text: editor.getValue(),
     language: 'fr',
   })
@@ -254,4 +255,12 @@ SpellChecker.reset = () => {
   SpellChecker.data = null;
   SpellChecker._overlay = null;
   SpellChecker._openMatch = null;
+}
+
+SpellChecker.abortFetchData = () => {
+  if (!SpellChecker.currentRequest) {
+    return
+  }
+  SpellChecker.currentRequest.abort();
+  SpellChecker.currentRequest = null;
 }
