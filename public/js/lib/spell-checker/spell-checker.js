@@ -40,7 +40,7 @@ export function SpellChecker(mode, codeMirrorInstance) {
           state.charCount = 0;
         }
 
-        if (!SpellChecker.data || !SpellChecker.data.matches || SpellChecker.isFetching) {
+        if (!SpellChecker.data || !SpellChecker.data.matches) {
           stream.next();
           state.charCount++;
           return null;
@@ -87,8 +87,6 @@ export function SpellChecker(mode, codeMirrorInstance) {
 }
 
 SpellChecker.data = null;
-SpellChecker.isFetching = null;
-SpellChecker.hasError = null;
 SpellChecker._overlay = null;
 SpellChecker._openMatch = null;
 
@@ -100,11 +98,6 @@ SpellChecker._openMatch = null;
  * @param {object} editor - The CodeMirror editor instance.
  */
 SpellChecker.fetchData = (editor) => {
-
-  editor.setOption('mode', config.defaultMode)
-
-  SpellChecker.isFetching = true;
-  SpellChecker.data = null;
 
   $.post(`${serverurl}/check/`, {
     text: editor.getValue(),
@@ -122,17 +115,17 @@ SpellChecker.fetchData = (editor) => {
         console.debug(data)
       }
       SpellChecker.data = data
-      SpellChecker.isFetching = false;
-      editor.setOption('mode', config.spellCheckerMode);
+      SpellChecker.render(editor)
     })
     .fail((err) => {
       if (debug) {
         console.debug(err)
       }
     })
-    .always(() => {
-      SpellChecker.isFetching = false;
-    })
+}
+
+SpellChecker.render = (editor) => {
+  editor.setOption('mode', config.spellCheckerMode);
 }
 
 SpellChecker.hasError = (token) => {
@@ -259,7 +252,6 @@ SpellChecker.reset = () => {
 
   // Reset SpellChecker's state
   SpellChecker.data = null;
-  SpellChecker.isFetching = null;
   SpellChecker._overlay = null;
   SpellChecker._openMatch = null;
 }
