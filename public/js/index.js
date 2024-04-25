@@ -3273,6 +3273,29 @@ editorInstance.on('cut', function () {
 editorInstance.on('paste', function () {
   // na
 })
+
+editorInstance.on('beforeChange', function (editor, change) {
+  if (editor.getOption('mode') !== config.spellCheckerMode) {
+    return
+  }
+  if (!SpellChecker.data || !SpellChecker.data.matches) {
+    return
+  }
+
+  // Remove matches that are affected by the change range
+  SpellChecker.data.matches = SpellChecker.data.matches.filter((match) => {
+    // strictly before
+    if (match.position.line > change.to.line || (match.position.line === change.to.line && match.position.ch > change.to.ch)) {
+      return true
+    }
+    // strictly after
+    if (match.position.line < change.from.line || (match.position.line === change.from.line && match.position.ch + match.length < change.from.ch)) {
+      return true
+    }
+    return false
+  })
+})
+
 let typingTimeout;
 editorInstance.on('changes', function (editor, changes) {
 
