@@ -3359,6 +3359,11 @@ function cursorActivityInner (editor) {
           match.position, // Start position of the match
           { line: match.position.line, ch: match.position.ch + match.length } // End position of the match
         );
+        // Find and remove replaced match
+        const index = SpellChecker.data.matches.indexOf(match);
+        if (index !== -1) {
+          SpellChecker.data.matches.splice(index, 1);
+        }
       }
       SpellChecker.openOverlay(match, cursorCoords, replaceTextMatch);
     } else {
