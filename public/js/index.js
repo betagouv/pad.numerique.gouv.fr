@@ -3304,60 +3304,12 @@ editorInstance.on('change', function (editor, change) {
     return
   }
 
-  SpellChecker.data.matches = SpellChecker.data.matches.map((match) => {
-    const isOnSameLine = change.from.line === change.to.line && change.from.line === match.position.line;
-    const isInsertedBeforeMatch = change.from.ch < match.position.ch;
-    const isSingleInsertion = change.text.length === 1 && change.removed.length === 1;
+  // If any pending request, abort it
+  SpellChecker.abortFetchData();
 
-    if (isOnSameLine && isInsertedBeforeMatch && isSingleInsertion) {
-      const numberCharactersInserted = change.text[0].length - change.removed[0].length
-      match.position.ch += numberCharactersInserted
-      match.offset = editor.indexFromPos(match.position)
-
-      return match
-    }
-
-    const lineAddition = change.text.length > change.removed.length
-    const numberLinesAdded = change.text.length - change.removed.length
-
-    if (lineAddition && isOnSameLine && change.from.ch === change.to.ch && isInsertedBeforeMatch) {
-
-      match.position.line += numberLinesAdded
-      match.position.ch -= change.to.ch
-      match.offset = editor.indexFromPos(match.position)
-
-      return match
-    }
-
-    if (lineAddition && change.to.line < match.position.line) {
-
-      match.position.line += numberLinesAdded
-      match.offset = editor.indexFromPos(match.position)
-
-      return match
-    }
-
-    const lineRemoval = change.text.length < change.removed.length
-    const numberRemovedLines = change.removed.length - change.text.length
-
-    if (lineRemoval && change.to.line === match.position.line) {
-      match.position.line -= numberRemovedLines
-      match.position.ch += change.from.ch
-      match.offset = editor.indexFromPos(match.position)
-
-      return match
-    }
-
-    if (lineRemoval && change.to.line < match.position.line) {
-
-      match.position.line -= numberRemovedLines
-      match.offset = editor.indexFromPos(match.position)
-
-      return match
-    }
-
-    return match
-  })
+  // Update match indexes to synchronize with local data changes before receiving updated data from the server
+  // Matches are linked to editor content through an offset, requiring manual adjustment before the next server data update
+  SpellChecker.updateMatchIndexes(change);
 })
 
 let typingTimeout;

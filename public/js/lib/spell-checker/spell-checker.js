@@ -264,3 +264,58 @@ SpellChecker.abortFetchData = () => {
   SpellChecker.currentRequest.abort();
   SpellChecker.currentRequest = null;
 }
+
+SpellChecker.updateMatchIndexes = (change) => {
+  SpellChecker.data.matches = SpellChecker.data.matches.map((match) => {
+    const isOnSameLine = change.from.line === change.to.line && change.from.line === match.position.line;
+    const isInsertedBeforeMatch = change.from.ch < match.position.ch;
+    const isSingleInsertion = change.text.length === 1 && change.removed.length === 1;
+
+    // If characters are inserted/removed on the same line as the match, before
+    if (isOnSameLine && isInsertedBeforeMatch && isSingleInsertion) {
+      const numberCharactersInserted = change.text[0].length - change.removed[0].length
+      match.position.ch += numberCharactersInserted
+      match.offset = editor.indexFromPos(match.position)
+      return match
+    }
+
+    const lineAddition = change.text.length > change.removed.length
+    const numberLinesAdded = change.text.length - change.removed.length
+
+    // If line are inserted on the same line as the match, before
+    if (lineAddition && isOnSameLine && change.from.ch === change.to.ch && isInsertedBeforeMatch) {
+      match.position.line += numberLinesAdded
+      match.position.ch -= change.to.ch
+      match.offset = editor.indexFromPos(match.position)
+      return match
+    }
+
+    // If line are inserted before the line of the match
+    if (lineAddition && change.to.line < match.position.line) {
+      match.position.line += numberLinesAdded
+      match.offset = editor.indexFromPos(match.position)
+      return match
+    }
+
+    const lineRemoval = change.text.length < change.removed.length
+    const numberRemovedLines = change.removed.length - change.text.length
+
+    // If line are removed on the same line as the match, before
+    if (lineRemoval && change.to.line === match.position.line) {
+      match.position.line -= numberRemovedLines
+      match.position.ch += change.from.ch
+      match.offset = editor.indexFromPos(match.position)
+      return match
+    }
+
+    // If line are removed before the line of the match
+    if (lineRemoval && change.to.line < match.position.line) {
+      match.position.line -= numberRemovedLines
+      match.offset = editor.indexFromPos(match.position)
+      return match
+    }
+
+    return match
+  })
+
+}
