@@ -102,7 +102,8 @@ SpellChecker.fetchData = (editor) => {
 
   SpellChecker.currentRequest = $.post(`${serverurl}/check/`, {
     text: editor.getValue(),
-    language: 'fr',
+    language: 'auto',
+    motherTongue: 'fr',
   })
     .done(data => {
       // LanguageTool returns an offset, but CodeMirror needs a line and character position
