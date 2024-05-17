@@ -275,10 +275,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gouvfr/dsfr@npm:=1.1.0":
-  version: 1.1.0
-  resolution: "@gouvfr/dsfr@npm:1.1.0"
-  checksum: 7b61b5913f835de47af2fe0f47a173a6b37c766081c3bdb1263676c256103b05d8746d8afaff6e5c808ff0fc2918e3b11341f152adecca6a33039aa39c4ac88a
+"@gouvfr-lasuite/integration@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@gouvfr-lasuite/integration@npm:1.0.1"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: "*"
+    react-dom: "*"
+    typescript: "*"
+  checksum: fb199453572f5982cb5f524a5c3209a55d3b0a972e17df68babaa66d180fc9ed4495f6b8847c0780e0af50b356498904ad188343ddd389ddcc3097c6ca595cee
+  languageName: node
+  linkType: hard
+
+"@gouvfr/dsfr@npm:1.11.2":
+  version: 1.11.2
+  resolution: "@gouvfr/dsfr@npm:1.11.2"
+  checksum: 76adaa7a3b2f892dcc79a2c089019bde5f56f385ba180ac6ee45af2e60cd7b258c60a4fe52226130d67bd8a441f692ef3296fab5c7302b2a7e4572a79969b0a7
   languageName: node
   linkType: hard
 
@@ -1196,7 +1209,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "HedgeDoc@workspace:."
   dependencies:
-    "@gouvfr/dsfr": =1.1.0
+    "@gouvfr-lasuite/integration": 1.0.1
+    "@gouvfr/dsfr": 1.11.2
     "@hedgedoc/codemirror-5": 5.65.12
     "@passport-next/passport-openid": 1.0.0
     Idle.Js: "git+https://github.com/shawnmclean/Idle.js"

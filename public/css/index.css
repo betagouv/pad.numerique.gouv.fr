@@ -35,6 +35,11 @@ body:not(.night) .night {
   padding: 6px;
 }
 
+.fr-logo {
+  padding: 1em;
+  margin: 0;
+}
+
 .CodeMirror {
     font-family: "Source Code Pro", Consolas, monaco, monospace;
     letter-spacing: 0.025em;

@@ -137,6 +137,10 @@ module.exports = {
           context: path.join(__dirname, 'node_modules/reveal.js'),
           from: 'plugin',
           to: 'reveal.js/plugin'
+        },
+        {
+          from: path.join(__dirname, 'node_modules/@gouvfr-lasuite/integration/dist/logos/pad.svg'),
+          to: 'lasuite/logo.svg'
         }
       ]
     }),
@@ -164,7 +168,8 @@ module.exports = {
       path.join(__dirname, 'public/css/bootstrap-social.css'),
       path.join(__dirname, 'node_modules/select2/select2.css'),
       path.join(__dirname, 'node_modules/select2/select2-bootstrap.css'),
-      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/dsfr.min.css')
+      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/dsfr.min.css'),
+      path.join(__dirname, 'node_modules/@gouvfr-lasuite/integration/dist/css/homepage-gaufre.css')
     ],
     'cover-pack': [
       'babel-polyfill',
@@ -199,16 +204,16 @@ module.exports = {
       path.join(__dirname, 'public/css/mermaid.css'),
       path.join(__dirname, 'public/css/markdown.css'),
       path.join(__dirname, 'public/css/slide-preview.css'),
-      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/header.min.css'),
-      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/logo.min.css')
+      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/component/header/header.min.css'),
+      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/component/logo/logo.min.css')
     ],
     'index-styles-pack': [
       path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css'),
       path.join(__dirname, 'node_modules/fork-awesome/css/fork-awesome.min.css'),
       path.join(__dirname, 'public/css/bootstrap-social.css'),
       path.join(__dirname, 'node_modules/ionicons/css/ionicons.min.css'),
-      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/header.min.css'),
-      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/css/logo.min.css')
+      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/component/header/header.min.css'),
+      path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist/component/logo/logo.min.css')
     ],
     'index-pack': [
       'babel-polyfill',
@@ -397,7 +402,7 @@ module.exports = {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
           loader: 'url-loader',
-          options: { limit: '10000', mimetype: 'svg+xml' }
+          options: { limit: '10000', mimetype: 'image/svg+xml' }
         }]
       }, {
         test: /\.png(\?v=\d+\.\d+\.\d+)?$/,

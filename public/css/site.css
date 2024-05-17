@@ -9,7 +9,7 @@ body {
     font-family: "Marianne","Source Sans Pro", Helvetica, Arial, sans-serif;
     letter-spacing: 0.025em;
 }
-:focus, .focus {
+:focus:not(:focus-visible), .focus {
     outline: none !important;
 }
 ::-moz-focus-inner {
