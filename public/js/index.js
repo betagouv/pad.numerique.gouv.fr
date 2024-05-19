@@ -3389,7 +3389,7 @@ function cursorActivityInner (editor) {
 
     if (SpellChecker.hasError(token)) {
       const match = token.state.overlay.match
-      const cursorCoords = editor.cursorCoords();
+      const coords = editor.charCoords(match.position);
       // Replace the match with the selected suggestion
       const replaceTextMatch = (value) => {
         const newValue = value === DELETE_DOUBLE_SPACE_VALUE ? " ": value;
@@ -3404,7 +3404,7 @@ function cursorActivityInner (editor) {
           SpellChecker.data.matches.splice(index, 1);
         }
       }
-      SpellChecker.openOverlay(match, cursorCoords, replaceTextMatch);
+      SpellChecker.openOverlay(match, coords, replaceTextMatch);
     } else {
       SpellChecker.closeOverlay()
     }
