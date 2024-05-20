@@ -79,7 +79,9 @@ import '@hedgedoc/codemirror-5/mode/vhdl/vhdl.js'
 import '@hedgedoc/codemirror-5/mode/xml/xml.js'
 import '@hedgedoc/codemirror-5/mode/yaml-frontmatter/yaml-frontmatter.js'
 import '@hedgedoc/codemirror-5/mode/yaml/yaml.js'
-import {SpellChecker} from '../spell-checker/spell-checker.js'
+import {
+  SpellChecker, SpellCheckerFeatureFlags
+} from '../spell-checker/spell-checker.js'
 
 import '../../../vendor/inlineAttachment/inline-attachment'
 import '../../../vendor/inlineAttachment/codemirror.inline-attachment'
@@ -326,7 +328,6 @@ export default class Editor {
     this.statusKeymap = this.statusBar.find('.status-keymap')
     this.statusLength = this.statusBar.find('.status-length')
     this.statusTheme = this.statusBar.find('.status-theme')
-    this.statusSpellcheck = this.statusBar.find('.status-spellcheck')
     this.statusPreferences = this.statusBar.find('.status-preferences')
     this.statusPanel = this.editor.addPanel(this.statusBar[0], {
       position: 'bottom'
@@ -547,6 +548,27 @@ export default class Editor {
   }
 
   setSpellcheck () {
+
+    if (SpellChecker.featureFlag === SpellCheckerFeatureFlags.DISABLED) {
+      return
+    }
+
+    if (SpellChecker.featureFlag === SpellCheckerFeatureFlags.HEADLESS) {
+      this.editor.setOption('mode', config.spellCheckerMode)
+      SpellChecker.fetchData(this.editor)
+      return
+    }
+
+    const htmlStatusSpellCheck = `
+      <div class="status-spellcheck">
+        <a class="ui-spellcheck-toggle" title="Toggle spellcheck"><i class="fa fa-check fa-fw"></i></a>
+      </div>
+    `
+
+    const statusIndicators = document.querySelector('.status-indicators');
+    statusIndicators.insertAdjacentHTML('beforeend', htmlStatusSpellCheck);
+
+    this.statusSpellcheck = this.statusBar.find('.status-spellcheck')
     const spellcheckToggle = this.statusSpellcheck.find('.ui-spellcheck-toggle')
 
     const cookieSpellcheck = Cookies.get('spellcheck')

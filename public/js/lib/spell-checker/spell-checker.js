@@ -61,6 +61,12 @@ export function SpellChecker(mode, codeMirrorInstance) {
           state.charCount++;
         }
 
+        // The spell checker runs and detects errors, but in headless mode, it does not add error or warning styles.
+        // This means users won't see errors or warnings and won't be able to click on them to open the overlay.
+        if (SpellChecker.featureFlag === SpellCheckerFeatureFlags.HEADLESS) {
+          return
+        }
+
         if (match.rule && match.rule.issueType && SPELLING_ERRORS_TYPES.includes(match.rule.issueType)) {
           return `${BASE_STYLE_CSS_CLASS}-error`
         }
@@ -366,3 +372,29 @@ document.addEventListener("click", function(event) {
   // Close the spell checker overlay if the click is outside both
   SpellChecker.closeOverlay();
 })
+
+/**
+ * Feature flags for controlling the SpellChecker feature.
+ *
+ * This object defines the states in which the spell checker can operate:
+ * - ENABLED: Fully operational.
+ * - DISABLED: Completely disabled.
+ * - HEADLESS: Operates without a UI, useful for testing or backend processing.
+ *
+ * `SpellChecker.featureFlag` is set based on the `SPELL_CHECKER_FEATURE_FLAG`
+ * environment variable. If the variable is not set to a valid flag, the feature
+ * defaults to DISABLED. It's a good **Risk Mitigation**, we can quickly disable
+ * the feature if issues arise.
+ */
+
+export const SpellCheckerFeatureFlags = {
+  ENABLED: 'enabled',
+  DISABLED: 'disabled',
+  HEADLESS: 'headless'
+};
+
+SpellChecker.featureFlag = process.env.SPELL_CHECKER_FEATURE_FLAG;
+
+if (!Object.values(SpellCheckerFeatureFlags).includes(SpellChecker.featureFlag)) {
+  SpellChecker.featureFlag = SpellCheckerFeatureFlags.DISABLED
+}
