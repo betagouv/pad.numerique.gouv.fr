@@ -19,9 +19,7 @@ import config from '../editor/config';
 
 // SpellChecker configurations
 const SPELLING_ERRORS_TYPES = ["misspelling"]
-const MAXIMUM_NUMBER_OF_REPLACEMENTS = 5;
 const BASE_STYLE_CSS_CLASS = "spell-check";
-export const TYPING_TIMEOUT_DURATION = 500;
 export const DELETE_DOUBLE_SPACE_VALUE = "Supprimer les doubles espaces"
 
 export function SpellChecker(mode, codeMirrorInstance) {
@@ -197,7 +195,7 @@ SpellChecker.createHtmlContent = (match) => {
   // Add suggestions to fix the match, if available
   if (match.replacements && match.replacements.length > 0) {
     html += "<ul>";
-    match.replacements.slice(0, MAXIMUM_NUMBER_OF_REPLACEMENTS).forEach((replacement) => {
+    match.replacements.slice(0, process.env.SPELL_CHECKER_MAXIMUM_NUMBER_OF_REPLACEMENTS).forEach((replacement) => {
       const value = replacement.value === " " ? DELETE_DOUBLE_SPACE_VALUE : replacement.value;
       html += `<li>${value}</li>`;
     })

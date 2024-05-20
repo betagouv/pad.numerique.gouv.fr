@@ -147,6 +147,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].[contenthash].css'
+    }),
+    new webpack.EnvironmentPlugin({
+      SPELL_CHECKER_TYPING_TIMEOUT_DURATION: 500,
+      SPELL_CHECKER_MAXIMUM_NUMBER_OF_REPLACEMENTS: 5,
     })
   ],
 

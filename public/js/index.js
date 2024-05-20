@@ -85,7 +85,7 @@ import Editor from './lib/editor'
 import getUIElements from './lib/editor/ui-elements'
 import modeType from './lib/modeType'
 import appState from './lib/appState'
-import {SpellChecker, TYPING_TIMEOUT_DURATION, DELETE_DOUBLE_SPACE_VALUE} from "./lib/spell-checker/spell-checker";
+import {SpellChecker, DELETE_DOUBLE_SPACE_VALUE} from "./lib/spell-checker/spell-checker";
 import config from './lib/editor/config';
 
 require('../vendor/showup/showup')
@@ -3330,7 +3330,7 @@ editorInstance.on('changes', function (editor, changes) {
     // Fetch new data after a duration without any new characters typed
     typingTimeout = setTimeout(function() {
       SpellChecker.fetchData(editor)
-    }, TYPING_TIMEOUT_DURATION);
+    }, process.env.SPELL_CHECKER_TYPING_TIMEOUT_DURATION);
   }
 
 
