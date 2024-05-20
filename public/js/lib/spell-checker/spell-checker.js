@@ -165,6 +165,50 @@ SpellChecker.getOverlayPosition = (cursorPosition) => {
 }
 
 /**
+ * This function uses the close icon from Bootstrap.
+ * @see {@link https://icons.getbootstrap.com/icons/x/}
+ * @returns {string} HTML string for the close button.
+ */
+SpellChecker.createHtmlCloseButton = () => {
+  return `
+    <button id="close-overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+      </svg>
+    </button>
+  `
+}
+
+SpellChecker.createHtmlContent = (match) => {
+  const shortMessage = match.shortMessage;
+  const ruleName = match.rule && match.rule.category && match.rule.category.name ;
+  const subtitle = shortMessage || ruleName;
+
+  let html = ''
+
+  // Add a sub-title if available, ex: 'Faute de frappe'
+  if (subtitle) {
+    html += `<p class='subtitle'>${subtitle}</p>`
+  }
+
+  // Add a descriptive message about the match
+  html += `<p class='message'>${match.message}</p>`;
+
+  // Add suggestions to fix the match, if available
+  if (match.replacements && match.replacements.length > 0) {
+    html += "<ul>";
+    match.replacements.slice(0, MAXIMUM_NUMBER_OF_REPLACEMENTS).forEach((replacement) => {
+      const value = replacement.value === " " ? DELETE_DOUBLE_SPACE_VALUE : replacement.value;
+      html += `<li>${value}</li>`;
+    })
+    html += "</ul>";
+  }
+
+  return html;
+}
+
+
+/**
  * Open an overlay to display information about the selected match.
  *
  * @param {object} match - The match object containing details about the detected issue.
@@ -178,48 +222,26 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
   const overlay = document.createElement("div");
   overlay.className = "spell-check-overlay";
 
-  let html = '';
-
-  // Add a close button
-  html += `
-    <button id="close-overlay">X</button>
+  // Build and set the HTML content of the overlay
+  overlay.innerHTML = `
+    <div>
+        <div class='header'>
+          <p class='title'>Correction</p>
+          ${SpellChecker.createHtmlCloseButton()}
+        </div>
+        <div class='content'>
+           ${SpellChecker.createHtmlContent(match)}
+        </div>
+    </div>
   `
-
-  // Add a title if available, ex: 'Faute de frappe'
-  const shortMessage = match.shortMessage;
-  const ruleName = match.rule && match.rule.category && match.rule.category.name ;
-  const title = shortMessage || ruleName;
-  if (title) {
-    html += `<p><strong>${title}</strong></p>`;
-  }
-
-  // Add a descriptive message about the match
-  html += `<p>${match.message}</p>`;
-
-  // Add suggestions to fix the match, if available
-  if (match.replacements && match.replacements.length > 0) {
-    html += "<p>Suggestions :</p>";
-    html += "<ul>";
-    match.replacements.slice(0, MAXIMUM_NUMBER_OF_REPLACEMENTS).forEach((replacement) => {
-      const value = replacement.value === " " ? DELETE_DOUBLE_SPACE_VALUE : replacement.value;
-      html += `<li>${value}</li>`;
-    })
-    html += "</ul>";
-  }
-
-  // Set the HTML content of the overlay
-  overlay.innerHTML = html;
 
   // Position the overlay
   const {top, left} = SpellChecker.getOverlayPosition(position)
   overlay.style.left = `${left}px`;
   overlay.style.top = `${top}px`;
 
-  // Handle click interactions
+  // Handle click interactions on suggestions
   overlay.addEventListener('click', function(event) {
-    if (event.target.id === "close-overlay") {
-      SpellChecker.closeOverlay();
-    }
     if (event.target.tagName === "LI") {
       onReplacementSelection(event.target.textContent);
       SpellChecker.closeOverlay();
@@ -232,6 +254,12 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
 
   // Append the overlay to the document body
   document.body.appendChild(overlay);
+
+  // Handle click interactions on close button
+  const closeButton = document.getElementById('close-overlay')
+  closeButton.addEventListener('click', function(event) {
+    SpellChecker.closeOverlay();
+  })
 }
 
 SpellChecker.closeOverlay = () => {

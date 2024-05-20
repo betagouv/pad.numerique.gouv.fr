@@ -13,23 +13,61 @@
 
 .spell-check-overlay {
   position: fixed;
-  max-width: 300px;
+  max-width: 320px;
   height: auto;
-  background-color: white;
+  background-color: #f1f3f9;
   z-index: 9999;
-  padding: 8px 16px;
-  border-radius: 2px;
+  padding: 8px 6px 6px;
+  border-radius: 8px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-
-  --button-width: 26px;
 }
 
 .spell-check-overlay button {
-  margin-left: calc(100% - var(--button-width));
+  height: 20px;
+  width: 20px;
+  padding: 2px 0;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  background: none;
+  border: none;
 }
 
-.spell-check-overlay p, ul {
-  margin-right: calc(var(--button-width) + 4px);
+.spell-check-overlay button:hover {
+  background-color: #dee3ed;
+}
+
+.spell-check-overlay .content {
+  background-color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 8px;
+}
+
+.spell-check-overlay .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.spell-check-overlay .title {
+  color: #2f3237;
+  font-size: 14px;
+  padding-left: 8px;
+  margin-bottom: 8px;
+  line-height: 20px;
+}
+
+.spell-check-overlay .subtitle {
+  color: #5e636e;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.spell-check-overlay .message {
+  color: #2f3237;
+  line-height: 1.42857;
+  margin: 8px 0;
 }
 
 .spell-check-overlay ul {
@@ -38,18 +76,21 @@
   flex-wrap: wrap;
   list-style: none;
   justify-items: start;
-  gap: 8px;
+  gap: 4px;
   padding-left: 0;
 }
 
 .spell-check-overlay li {
-  border: 1px solid black;
+  cursor: pointer;
+  background-color: rgb(35, 154, 255);
+  transition: background-color 0.3s ease;
+  color: white;
   border-radius: 4px;
-  line-height: 24px;
-  padding: 2px 6px;
+  line-height: 25px;
+  padding: 0 8px 3px;
   display: inline-block;
 }
 
 .spell-check-overlay li:hover {
-  background-color: #f5f5f5;
+  background-color: rgb(25, 118, 240);
 }
