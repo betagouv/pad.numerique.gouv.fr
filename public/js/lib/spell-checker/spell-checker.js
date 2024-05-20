@@ -348,3 +348,23 @@ SpellChecker.updateMatchIndexes = (change) => {
   })
 
 }
+
+
+/**
+ * The CodeMirror "blur" event cannot reliably close the overlay because it triggers even when clicking on the overlay
+ * itself, leading to unintended closure. Furthermore, it lacks information about the click target, it always set to the
+ * hidden text area, making it impossible to discern if the click occurred within the overlay or elsewhere.
+ */
+document.addEventListener("click", function(event) {
+
+  const overlay = document.getElementsByClassName('spell-check-overlay')[0]
+  const editor = document.getElementsByClassName('CodeMirror')[0]
+
+  // Check if the click is within the overlay or editor
+  if ((overlay && overlay.contains(event.target)) || (editor && editor.contains(event.target))) {
+    return;
+  }
+
+  // Close the spell checker overlay if the click is outside both
+  SpellChecker.closeOverlay();
+})
