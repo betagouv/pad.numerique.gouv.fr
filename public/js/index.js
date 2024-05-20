@@ -85,8 +85,8 @@ import Editor from './lib/editor'
 import getUIElements from './lib/editor/ui-elements'
 import modeType from './lib/modeType'
 import appState from './lib/appState'
-import {SpellChecker, DELETE_DOUBLE_SPACE_VALUE} from "./lib/spell-checker/spell-checker";
-import config from './lib/editor/config';
+import { SpellChecker, DELETE_DOUBLE_SPACE_VALUE } from './lib/spell-checker/spell-checker'
+import config from './lib/editor/config'
 
 require('../vendor/showup/showup')
 
@@ -3305,34 +3305,31 @@ editorInstance.on('change', function (editor, change) {
   }
 
   // If any pending request, abort it
-  SpellChecker.abortFetchData();
+  SpellChecker.abortFetchData()
 
   // Update match indexes to synchronize with local data changes before receiving updated data from the server
   // Matches are linked to editor content through an offset, requiring manual adjustment before the next server data update
-  SpellChecker.updateMatchIndexes(change);
+  SpellChecker.updateMatchIndexes(change)
 })
 
-let typingTimeout;
+let typingTimeout
 editorInstance.on('changes', function (editor, changes) {
-
   // Fetch data only if the spell-checker mode is activated
   if (editor.getOption('mode') === config.spellCheckerMode) {
-
     // If any pending request, abort it
-    SpellChecker.abortFetchData();
+    SpellChecker.abortFetchData()
 
     // Close the overlay if it's open
-    SpellChecker.closeOverlay();
+    SpellChecker.closeOverlay()
 
     // Reset the typing timeout
-    clearTimeout(typingTimeout);
+    clearTimeout(typingTimeout)
 
     // Fetch new data after a duration without any new characters typed
-    typingTimeout = setTimeout(function() {
+    typingTimeout = setTimeout(function () {
       SpellChecker.fetchData(editor)
-    }, process.env.SPELL_CHECKER_TYPING_TIMEOUT_DURATION);
+    }, process.env.SPELL_CHECKER_TYPING_TIMEOUT_DURATION)
   }
-
 
   updateHistory()
   const docLength = editor.getValue().length
@@ -3369,42 +3366,41 @@ editorInstance.on('focus', function (editor) {
   personalInfo.cursor = editor.getCursor()
   socket.emit('cursor focus', editor.getCursor())
 })
-editorInstance.on('scroll', function(editor) {
-  SpellChecker.closeOverlay();
+editorInstance.on('scroll', function (editor) {
+  SpellChecker.closeOverlay()
 })
-editorInstance.on('refresh', function(editor) {
+editorInstance.on('refresh', function (editor) {
   // Close the overlay when the editor is refreshed or resized.
   // This event is useful for invalidating cached values
   // that depend on the editor or character size, as mentioned in the documentation.
-  SpellChecker.closeOverlay();
+  SpellChecker.closeOverlay()
 })
 
 const cursorActivity = _.debounce(cursorActivityInner, cursorActivityDebounce)
 
 function cursorActivityInner (editor) {
   if (editorHasFocus() && !Visibility.hidden()) {
-
-    const cursorPosition = editor.getCursor();
-    const token = editor.getTokenAt(cursorPosition);
+    const cursorPosition = editor.getCursor()
+    const token = editor.getTokenAt(cursorPosition)
 
     if (SpellChecker.hasError(token)) {
       const match = token.state.overlay.match
-      const coords = editor.charCoords(match.position);
+      const coords = editor.charCoords(match.position)
       // Replace the match with the selected suggestion
       const replaceTextMatch = (value) => {
-        const newValue = value === DELETE_DOUBLE_SPACE_VALUE ? " ": value;
+        const newValue = value === DELETE_DOUBLE_SPACE_VALUE ? ' ' : value
         editor.replaceRange(
           newValue,
           match.position, // Start position of the match
           { line: match.position.line, ch: match.position.ch + match.length } // End position of the match
-        );
+        )
         // Find and remove replaced match
-        const index = SpellChecker.data.matches.indexOf(match);
+        const index = SpellChecker.data.matches.indexOf(match)
         if (index !== -1) {
-          SpellChecker.data.matches.splice(index, 1);
+          SpellChecker.data.matches.splice(index, 1)
         }
       }
-      SpellChecker.openOverlay(match, coords, replaceTextMatch);
+      SpellChecker.openOverlay(match, coords, replaceTextMatch)
     } else {
       SpellChecker.closeOverlay()
     }

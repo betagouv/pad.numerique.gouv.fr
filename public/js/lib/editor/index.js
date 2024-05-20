@@ -548,7 +548,6 @@ export default class Editor {
   }
 
   setSpellcheck () {
-
     if (SpellChecker.featureFlag === SpellCheckerFeatureFlags.DISABLED) {
       return
     }
@@ -565,8 +564,8 @@ export default class Editor {
       </div>
     `
 
-    const statusIndicators = document.querySelector('.status-indicators');
-    statusIndicators.insertAdjacentHTML('beforeend', htmlStatusSpellCheck);
+    const statusIndicators = document.querySelector('.status-indicators')
+    statusIndicators.insertAdjacentHTML('beforeend', htmlStatusSpellCheck)
 
     this.statusSpellcheck = this.statusBar.find('.status-spellcheck')
     const spellcheckToggle = this.statusSpellcheck.find('.ui-spellcheck-toggle')
@@ -614,7 +613,6 @@ export default class Editor {
         secure: window.location.protocol === 'https:'
       })
     })
-
 
     // workaround spellcheck might not activate beacuse the ajax loading
     if (window.num_loaded < 2) {
@@ -685,7 +683,6 @@ export default class Editor {
   }
 
   init (textit) {
-
     SpellChecker(config.spellCheckerMode, CodeMirror)
 
     this.editor = CodeMirror.fromTextArea(textit, {
