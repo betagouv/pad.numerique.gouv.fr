@@ -2,13 +2,6 @@
  * Globals
  */
 
-/* Links */
-
-a,
-a:focus,
-a:hover {
-    color: #fff;
-}
 /* Custom default button */
 
 .btn-default,
@@ -18,111 +11,47 @@ a:hover {
     text-shadow: none;
     /* Prevent inheritence from `body` */
     background-color: #fff;
+    /* prevents collision with DSFR base styles */
+    background-image: none;
     border: 1px solid #fff;
 }
-/*
- * Base structure
- */
-html {
-    height: 100%;
-}
-html,
-body {
-    background-color: #333;
-}
-body {
-    min-height: 100%;
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-}
-/* Extra markup and styles for table-esque vertical and horizontal centering */
 
-.site-wrapper {
-    padding: 10px;
-    display: table;
-    width: 100%;
-    height: 100vh;
-    /* For at least Firefox */
-    min-height: 100%;
-    -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+/* prevents collision with DSFR base styles */
+.btn-default:hover,
+.btn-default:focus {
+  background-color: #f6f6f6 !important;
 }
-.site-wrapper-inner {
-    display: table-cell;
-    vertical-align: middle;
+
+/* prevents collision with DSFR base styles */
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #c9302c !important;
 }
-.cover-container {
+
+.cover-section-wrapper {
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.cover-section {
     width: 100%;
-    padding-top: 80px;
     margin-right: auto;
     margin-left: auto;
 }
-/* Padding for spacing */
+
+@media (min-width: 62em) {
+  .cover-section {
+    padding-top: 80px;
+  }
+}
 
 .inner {
     padding: 10px;
 }
-/*
- * Header
- */
 
-.masthead {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-.masthead-brand {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.masthead-nav {
-    text-align: left;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.masthead-nav > li {
-    display: inline-block;
-}
-.masthead-nav > li + li {
-    margin-left: 20px;
-}
-.masthead-nav > li > a {
-    padding-right: 0;
-    padding-left: 0;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    /* IE8 proofing */
-    color: rgba(255, 255, 255, .75);
-    border-bottom: 2px solid transparent;
-}
-.masthead-nav > li > a:hover,
-.masthead-nav > li > a:focus {
-    background-color: transparent;
-    border-bottom-color: #a9a9a9;
-    border-bottom-color: rgba(255, 255, 255, .25);
-}
-.masthead-nav > .active > a,
-.masthead-nav > .active > a:hover,
-.masthead-nav > .active > a:focus {
-    color: #fff;
-    border-bottom-color: #fff;
-}
-@media (min-width: 768px) {
-    .masthead-brand {
-        float: left;
-    }
-    .masthead-nav {
-        float: none;
-    }
-    .inner {
-        padding: 30px 25px;
-    }
-}
 /*
  * Cover
  */
@@ -134,65 +63,21 @@ body {
     padding: 10px 20px;
     font-weight: bold;
 }
-/*
- * Footer
- */
 
-.mastfoot {
-    color: #999;
-    /* IE8 proofing */
-    color: rgba(255, 255, 255, .5);
-}
-/*
- * Affix and center
- */
-
-@media (min-width: 768px) {
-    /* Pull out the header and footer */
-    .masthead {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100% !important;
-    }
-    .mastfoot {
-        position: fixed;
-        bottom: 0;
-    }
-    /* Start the vertical centering */
-    .site-wrapper-inner {
-        vertical-align: middle;
-    }
-    /* Handle the widths */
-    .masthead,
-    .mastfoot,
-    .cover-container {
-        width: 100%;
-        /* Must be percentage or pixels for horizontal alignment */
-    }
-}
 @media (min-width: 992px) {
-    .masthead,
-    .mastfoot,
-    .cover-container {
+    .cover-section {
         width: 1000px;
     }
 }
-.section ul {
+
+.cover-section ul {
     list-style: none;
 }
-/* custom */
 
-html,
-body {
-    overflow-x: hidden;
-}
 input {
     color: black;
 }
-.mastfoot {
-    position: relative;
-}
+
 .select2-container-multi .select2-choices .select2-search-field input {
     font-family: inherit;
     padding: 5px 12px;
@@ -200,6 +85,7 @@ input {
 .select2-container {
     margin: 0 auto !important;
 }
+
 .list {
     width: 100%;
     padding-left: 0;
@@ -351,6 +237,12 @@ input {
 
 .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
     color: white;
+}
+
+.ui-history.active {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
 }
 
 .screenshot {

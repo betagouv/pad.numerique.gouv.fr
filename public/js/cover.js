@@ -26,6 +26,10 @@ import {
 import { saveAs } from 'file-saver'
 import List from 'list.js'
 import S from 'string'
+import '@gouvfr/dsfr/dist/core/core.module'
+import '@gouvfr/dsfr/dist/component/navigation/navigation.module'
+import '@gouvfr/dsfr/dist/component/modal/modal.module'
+import '@gouvfr/dsfr/dist/component/header/header.module'
 
 require('./locale')
 require('../css/cover.css')
@@ -92,28 +96,26 @@ function pageInit () {
   )
 }
 
-$('.masthead-nav li').click(function () {
-  $(this).siblings().removeClass('active')
-  $(this).addClass('active')
-})
-
 // prevent empty link change hash
 $('a[href="#"]').click(function (e) {
   e.preventDefault()
 })
 
 $('.ui-home').click(function (e) {
+  e.preventDefault()
   if (!$('#home').is(':visible')) {
     $('.section:visible').hide()
     $('#home').fadeIn()
   }
+  $('.ui-history').removeClass('active')
 })
 
-$('.ui-history').click(() => {
+$('body').on('click', '.ui-history', () => {
   if (!$('#history').is(':visible')) {
     $('.section:visible').hide()
     $('#history').fadeIn()
   }
+  $('.ui-history').addClass('active')
 })
 
 function checkHistoryList () {

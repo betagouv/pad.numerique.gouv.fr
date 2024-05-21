@@ -1,182 +1,246 @@
-<div>
-    <header role="banner" class="fr-header">
+<div class="lasuite lasuite-homepage">
+    <header role="banner" class="fr-header lasuite-header">
         <div class="fr-header__body">
-            <div class="fr-container">
-            <div class="fr-header__body-row">
-                <div class="fr-header__brand fr-enlarge-link">
-                <div class="fr-header__brand-top">
-                    <div class="fr-header__logo">
-                    <p class="fr-logo">
-                        République
-                        <br>Française
-                    </p>
+            <div class="fr-container lasuite-container">
+                <div class="fr-header__body-row">
+                    <div class="fr-header__brand lasuite-header__brand fr-enlarge-link">
+                        <div class="fr-header__brand-top lasuite-header__brand-top">
+                            <div class="fr-header__logo">
+                                <p class="fr-logo">République <br role="presentation">Française</p>
+                            </div>
+                        </div>
+                        <div class="fr-header__service lasuite-header__service">
+                            <a class="lasuite-header__service-link ui-home" href="/" title="Accueil - Notepad de l'État" aria-label="Accueil - Notepad de l'État">
+                                <img src="/build/lasuite/logo.svg" alt="" class="lasuite-header__service-logo fr-responsive-img" width="32" height="32">
+                                <p class="fr-header__service-title lasuite-header__service-title">Notepad de l'État</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fr-header__navbar <% if(!signin) { %>fr-mr-1v<% } %>">
+                        <button
+                            type="button"
+                            class="lasuite-gaufre-btn lasuite-gaufre-btn--small lasuite-gaufre-btn--vanilla js-lasuite-gaufre-btn"
+                            title="Les services de La Suite numérique"
+                        >
+                            Les services de La Suite numérique
+                        </button>
+                        <% if(signin) { %>
+                        <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-499" aria-haspopup="menu" id="button-500" title="Menu">
+                            Menu
+                        </button>
+                        <% } %>
+                    </div>
+                    <div class="fr-header__tools">
+                        <div class="fr-header__tools-links lasuite-header__tools-links" data-fr-js-header-links="true">
+                            <ul class="fr-btns-group">
+                                <% if (allowAnonymous) { %>
+                                <li class="ui-signin" style="<% if(signin) { %> display: none;<% } %>"><a href="<%- serverURL %>/new" class="fr-btn"><%= __('New guest note') %></a></li>
+                                <% } %>
+                                <li class="ui-signout" style="<% if(!signin) { %> display: none;<% } %>">
+                                    <a href="<%- serverURL %>/new" title="<%= __('New note') %>" class="fr-btn fr-icon-add-line">
+                                        <%= __('New note') %>
+                                    </a>
+                                </li>
+                                <li class="lasuite-nomobile">
+                                    <button
+                                        type="button"
+                                        class="lasuite-gaufre-btn <% if(signin) { %>lasuite-gaufre-btn--small<% } %> lasuite-gaufre-btn--vanilla js-lasuite-gaufre-btn"
+                                        title="Les services de La Suite numérique"
+                                    >
+                                        Les services de La Suite numérique
+                                    </button>
+                                </li>
+                                <li class="lasuite-nomobile ui-signout ui-profile dropdown" style="<% if(!signin) { %> display: none;<% } %>">
+                                    <button id="profileLabel" title="Compte" class="fr-btn fr-icon-account-circle-line" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Compte
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" aria-labelledby="profileLabel">
+                                        <li><a><i class="fa fa-user fa-fw"></i> <span class="ui-name"></span></a></li>
+                                        <li><a href="<%- serverURL %>/me/export"><i class="fa fa-cloud-download fa-fw"></i> <%= __('Export user data') %></a></li>
+                                        <li><a class="ui-delete-user" data-toggle="modal" data-target=".delete-user-modal"><i class="fa fa-trash fa-fw"></i> <%= __('Delete user') %></a></li>
+                                        <li><a href="<%- serverURL %>/logout"><i class="fa fa-sign-out fa-fw"></i> <%= __('Sign Out') %></li>
+                                    </ul>
+                                </li>
+                                <li class="lasuite-onlymobile ui-signout" style="<% if(!signin) { %> display: none;<% } %>">
+                                    <a class="fr-btn" href="<%- serverURL %>/me/export">
+                                        <i class="fa fa-cloud-download fa-fw"></i> <%= __('Export user data') %>
+                                    </a>
+                                </li>
+                                <li class="lasuite-onlymobile ui-signout" style="<% if(!signin) { %> display: none;<% } %>">
+                                    <a class="fr-btn ui-delete-user" data-toggle="modal" data-target=".delete-user-modal">
+                                        <i class="fa fa-trash fa-fw"></i> <%= __('Delete user') %>
+                                    </a>
+                                </li>
+                                <li class="lasuite-onlymobile ui-signout" style="<% if(!signin) { %> display: none;<% } %>">
+                                    <a class="fr-btn lasuite-ellipsis" href="<%- serverURL %>/logout">
+                                        <i class="fa fa-sign-out fa-fw"></i> <%= __('Sign Out') %> (<span class="ui-name"></span>)
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="fr-header__service">
-                    <a href="/" title="Accueil - Pad numerique">
-                    <p class="fr-header__service-title">Notepad de l'État</p>
-                    </a>
-                    <p class="fr-header__service-tagline">Plateforme de notes collaboratives</p>
-                </div>
-                </div>
             </div>
+        </div>
+        <div class="fr-header__menu fr-modal" id="modal-499" aria-labelledby="button-500">
+            <div class="fr-container">
+                <button class="fr-btn--close fr-btn" aria-controls="modal-499" title="Fermer">
+                    Fermer
+                </button>
+                <div class="fr-header__menu-links">
+                </div>
             </div>
         </div>
     </header>
-    <div class="site-wrapper" style="position: relative;">
-        <div class="site-wrapper-inner">
-            <div class="cover-container">
-                <div class="masthead clearfix">
-                    <div class="inner">
-                        <h3 class="masthead-brand"></h3>
-                        <nav>
-                            <ul class="nav masthead-nav">
-                                <li class="ui-home<% if(!signin) { %> active<% } %>"><a href="#"><%= __('Intro') %></a>
-                                </li>
-                                <li class=""><a href="<%- serverURL %>/apropos">Aide</a></li>
-                                <li class="ui-history<% if(signin) { %> active<% } %>"><a href="#"><%= __('History') %></a>
-                                </li>
-                                <div class="ui-signin" style="float: right; margin-top: 8px;<% if(signin) { %> display: none;<% } %>">
-                                    <% if (allowAnonymous) { %>
-                                    <a type="button" href="<%- serverURL %>/new" class="fr-btn fr-btn--sm fr-btn--secondary fr-btn--white-outline fr-btn--icon-left fr-fi-add-line">
-                                        <%= __('New guest note') %></a>
-                                    <% } %>
-                                    <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
-                                    <a class="fr-btn fr-btn--primary fr-btn--white fr-btn--sm" href="<%- serverURL %>/auth/oauth2"><%= __('Sign In') %></a>
-                                    <% } %>
+
+    <div class="lasuite-homepage__wrapper">
+        <div class="section" id="home" <% if(signin) { %> style="display:none;"<% } %>>
+            <div class="fr-container fr-p-0 lasuite-container">
+                <div class="lasuite-homepage__content">
+                    <div class="fr-container--fluid">
+                        <div class="fr-grid-row">
+                            <div class="lasuite-homepage__main-col">
+                                <div class="lasuite-homepage__tagline-container">
+                                    <h1 class="lasuite-homepage__tagline">
+                                        <strong class="lasuite-homepage__tagline-strong">Notepad de l’État</strong>
+                                        <br role="presentation">Le meilleur moyen d’écrire
+                                        <br role="presentation"> et partager votre savoir
+                                        <br role="presentation"> en markdown
+                                    </h1>
                                 </div>
-                                <div class="ui-signout" style="float: right; margin-top: 8px;<% if(!signin) { %> display: none;<% } %>">
-                                    <a type="button" href="<%- serverURL %>/new" class="fr-btn fr-btn--sm fr-btn--secondary fr-btn--white-outline fr-btn--icon-left fr-fi-add-line"><%= __('New note') %></a>
-                                    <span class="ui-profile dropdown pull-right">
-                                        <button id="profileLabel" class="btn btn-sm btn-link ui-profile-label" style="padding-right: 0;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img class="ui-avatar" width="20" height="20"><span class="hidden-xs hidden-sm">&ensp;<span class="ui-name"></span></span>&ensp;<i class="fa fa-caret-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="profileLabel">
-                                            <li><a href="<%- serverURL %>/features"><i class="fa fa-dot-circle-o fa-fw"></i> <%= __('Features') %></a></li>
-                                            <li><a href="<%- serverURL %>/me/export"><i class="fa fa-cloud-download fa-fw"></i> <%= __('Export user data') %></a></li>
-                                            <li><a class="ui-delete-user" data-toggle="modal" data-target=".delete-user-modal"><i class="fa fa-trash fa-fw"></i> <%= __('Delete user') %></a></li>
-                                            <li><a href="<%- serverURL %>/logout"><i class="fa fa-sign-out fa-fw"></i> <%= __('Sign Out') %></a></li>
-                                        </ul>
-                                    </span>
+                            </div>
+
+                            <div class="lasuite-homepage__secondary-col">
+                                <div class="lasuite-homepage__form-container">
+                                    <div class="lasuite-homepage__form">
+                                        <ul class="fr-btns-group">
+                                            <% if (authProviders.facebook || authProviders.twitter || authProviders.github || authProviders.gitlab || authProviders.mattermost || authProviders.dropbox || authProviders.google || authProviders.ldap || authProviders.saml || authProviders.oauth2 || authProviders.email) { %>
+                                                <li class="ui-signin" style="<% if(signin) { %> display: none;<% } %>">
+                                                    <a class="fr-btn fr-btn--lg" href="<%- serverURL %>/auth/oauth2">
+                                                        <%= __('Sign In') %>
+                                                    </a>
+                                                </li>
+                                            <% } %>
+                                            <li>
+                                                <a href="#" class="ui-history fr-btn fr-btn--lg" style="min-width: 200px;">Historique</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%- serverURL %>/apropos" class="fr-btn fr-btn--lg fr-btn--secondary" style="min-width: 200px;">Qu'est-ce que le pad&nbsp;?</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.authentification.beta.gouv.fr/#test_eligibilite" class="fr-btn fr-btn--lg fr-btn--secondary" style="min-width: 200px;">Puis-je utiliser le pad&nbsp;?</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%- serverURL %>/features" class="fr-btn fr-btn--lg fr-btn--secondary">Fonctionnalités</a>
+                                            </li>
+                                        </p>
+                                    </div>
                                 </div>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-
-                <div id="home" class="section"<% if(signin) { %> style="display:none;"<% } %>>
-                    <div class="inner cover">
-                        <h1 class="cover-heading" style="color: white;">Notepad de l'État</h1>
-                        <p class="lead" style="color: white;">
-                            <%= __('Best way to write and share your knowledge in markdown.') %>
-                        </p>
-                        <span class="ui-signin">
-                            <a type="button" href="<%- serverURL %>/apropos" class="fr-btn fr-btn--secondary fr-btn--white-outline" style="min-width: 200px;">Qu'est-ce que le pad&nbsp;?</a>
-                            <a type="button" href="https://www.authentification.beta.gouv.fr/#test_eligibilite" class="fr-btn fr-btn--secondary fr-btn--white-outline" style="min-width: 200px;">Puis-je utiliser le pad&nbsp;?</a>
-                            <br>
-                            <br>
-                        </span>
-                    </div>
-                </div>
-
-                <div id="history" class="section"<% if(!signin) { %> style="display:none;"<% } %>>
-                    <div class="ui-signin"<% if(signin) { %> style="display:none;"<% } %>>
-                        <p style="color: white;"><%= __('Below is the history from browser') %></p>
-                    </div>
-                    <br>
-                    <form class="form-inline">
-                        <div class="form-group" style="vertical-align: bottom;">
-                            <input class="form-control ui-use-tags" placeholder="<%= __('Select tags...') %>" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input class="search form-control" placeholder="<%= __('Search keyword...') %>" />
-                        </div>
-                        <a href="#" class="sort btn btn-default" data-sort="text" title="<%= __('Sort by title') %>">
-                        <%= __('Title') %>
-                        </a>
-                        <a href="#" class="sort btn btn-default" data-sort="timestamp" title="<%= __('Sort by time') %>">
-                        <%= __('Time') %>
-                        </a>
-                        <span class="hidden-xs hidden-sm">
-                            <a href="#" class="btn btn-default ui-save-history" title="<%= __('Export history') %>"><i class="fa fa-save"></i></a>
-                            <span class="btn btn-default btn-file ui-open-history" title="<%= __('Import history') %>">
-                                <i class="fa fa-folder-open-o"></i><input type="file" />
-                            </span>
-                        <a href="#" class="btn btn-default ui-clear-history" title="<%= __('Clear history') %>" data-toggle="modal" data-target=".delete-history-modal"><i class="fa fa-trash-o"></i></a>
-                        </span>
-                        <a href="#" class="btn btn-default ui-refresh-history" title="<%= __('Refresh history') %>"><i class="fa fa-refresh"></i></a>
-                    </form>
-                    <br>
-                    <h4 class="ui-nohistory" style="display:none; color:">
-                        <%= __('No history') %>
-                    </h4>
-                    <a href="#" class="btn btn-primary ui-import-from-browser" style="display:none;"><%= __('Import from browser') %></a>
-                    <ul id="history-list" class="list">
-                    </ul>
-                    <ul class="pagination"></ul>
-                </div>
-
-                <div class="mastfoot">
-                    <div class="inner">
-                        <p>
-                            <%- __('Powered by %s', '<a href="https://hedgedoc.org">HedgeDoc</a>') %> | <a href="<%- serverURL %>/s/release-notes" target="_blank" rel="noopener"><%= __('Releases') %></a> | <a href="<%- sourceURL %>" target="_blank" rel="noopener"><%= __('Source Code') %></a><% if(imprint) { %> | <a href="<%- serverURL %>/s/imprint" target="_blank" rel="noopener"><%= __('Imprint') %></a><% } %><% if(privacyStatement) { %> | <a href="<%- serverURL %>/s/privacy" target="_blank" rel="noopener"><%= __('Privacy') %></a><% } %><% if(termsOfUse) { %> | <a href="<%- serverURL %>/s/terms-of-use" target="_blank" rel="noopener"><%= __('Terms of Use') %></a><% } %>
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="history" class="cover-section-wrapper section"<% if(!signin) { %> style="display:none;"<% } %>>
+            <div class="cover-section">
+                <div class="ui-signin"<% if(signin) { %> style="display:none;"<% } %>>
+                    <p style="color: #fff; font-weight: bold;"><%= __('Below is the history from browser') %></p>
+                </div>
+                <br>
+                <form class="form-inline">
+                    <div class="form-group" style="vertical-align: bottom;">
+                        <input class="form-control ui-use-tags" placeholder="<%= __('Select tags...') %>" />
+                    </div>
+                    <div class="form-group">
+                        <input class="search form-control" placeholder="<%= __('Search keyword...') %>" />
+                    </div>
+                    <a href="#" class="sort btn btn-default" data-sort="text" title="<%= __('Sort by title') %>">
+                        <%= __('Title') %>
+                    </a>
+                    <a href="#" class="sort btn btn-default" data-sort="timestamp" title="<%= __('Sort by time') %>">
+                        <%= __('Time') %>
+                    </a>
+                    <span class="hidden-xs hidden-sm">
+                        <a href="#" class="btn btn-default ui-save-history" title="<%= __('Export history') %>"><i class="fa fa-save"></i></a>
+                        <span class="btn btn-default btn-file ui-open-history" title="<%= __('Import history') %>">
+                            <i class="fa fa-folder-open-o"></i><input type="file" />
+                        </span>
+                        <a href="#" class="btn btn-default ui-clear-history" title="<%= __('Clear history') %>" data-toggle="modal" data-target=".delete-history-modal"><i class="fa fa-trash-o"></i></a>
+                    </span>
+                    <a href="#" class="btn btn-default ui-refresh-history" title="<%= __('Refresh history') %>"><i class="fa fa-refresh"></i></a>
+                </form>
+                <br>
+                <h4 class="ui-nohistory" style="display:none; color:">
+                    <%= __('No history') %>
+                </h4>
+                <a href="#" class="btn btn-primary ui-import-from-browser" style="display:none;"><%= __('Import from browser') %></a>
+                <ul id="history-list" class="list">
+                </ul>
+                <ul class="pagination"></ul>
+            </div>
+        </div>
+        <picture class="lasuite-homepage__bg">
+            <source srcset="https://integration.lasuite.numerique.gouv.fr/api/backgrounds/v1/pad.avif" type="image/avif">
+            <img src="https://integration.lasuite.numerique.gouv.fr/api/backgrounds/v1/pad.jpg" alt="" width="1920" height="1080">
+        </picture>
     </div>
+
+    <footer class="fr-footer" role="contentinfo" id="footer" style="background-color: white;">
+        <div class="fr-container lasuite-container">
+            <div class="fr-footer__body">
+                <div class="fr-footer__brand">
+                    <a class="fr-logo" href="/" title="république française">
+                        <span class="fr-logo__title">république
+                            <br />française</span>
+                    </a>
+                </div>
+                <div class="fr-footer__content">
+                    <p class="fr-footer__content-desc">
+                        <%- __('Powered by %s', '<a href="https://hedgedoc.org">HedgeDoc</a>') %> | <a href="<%- serverURL %>/s/release-notes" target="_blank" rel="noopener"><%= __('Releases') %></a> | <a href="<%- sourceURL %>" target="_blank" rel="noopener"><%= __('Source Code') %></a><% if(imprint) { %> | <a href="<%- serverURL %>/s/imprint" target="_blank" rel="noopener"><%= __('Imprint') %></a><% } %><% if(privacyStatement) { %> | <a href="<%- serverURL %>/s/privacy" target="_blank" rel="noopener"><%= __('Privacy') %></a><% } %><% if(termsOfUse) { %> | <a href="<%- serverURL %>/s/terms-of-use" target="_blank" rel="noopener"><%= __('Terms of Use') %></a><% } %>
+                    </p>
+                    <ul class="fr-footer__content-list">
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://legifrance.gouv.fr">legifrance.gouv.fr</a>
+                        </li>
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://gouvernement.fr">gouvernement.fr</a>
+                        </li>
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://service-public.fr">service-public.fr</a>
+                        </li>
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://data.gouv.fr">data.gouv.fr</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="fr-footer__bottom">
+                <ul class="fr-footer__bottom-list">
+
+                    <li class="fr-footer__bottom-item">
+                        <a href="/s/terms-of-use" class="fr-footer__bottom-link">Mentions légales</a>
+                    </li>
+
+                    <li class="fr-footer__bottom-item">
+                        <a href="/s/suivi/" class="fr-footer__bottom-link">Données personnelles et cookies</a>
+                    </li>
+
+                    <li class="fr-footer__bottom-item">
+                        <a href="/s/accessibilite/" class="fr-footer__bottom-link">Accessibilité : non conforme</a>
+                    </li>
+
+                    <li class="fr-footer__bottom-item">
+                        <label for="ui_locale" class="fr-footer__bottom-link">Langue de l’interface</label>
+                        <select id="ui_locale" class="fr-select ui-locale" ></select>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </footer>
 </div>
-<footer class="fr-footer" role="contentinfo" id="footer" style="background-color: white;">
-    <div class="fr-container">
-      <div class="fr-footer__body">
-          <div class="fr-footer__brand">
-              <a class="fr-logo" href="/" title="république française">
-                  <span class="fr-logo__title">république
-                      <br>française</span>
-              </a>
-          </div>
-          <div class="fr-footer__content">
-              <ul class="fr-footer__content-list">
-                  <li class="fr-footer__content-item">
-                      <a class="fr-footer__content-link" href="https://legifrance.gouv.fr">legifrance.gouv.fr</a>
-                  </li>
-                  <li class="fr-footer__content-item">
-                      <a class="fr-footer__content-link" href="https://gouvernement.fr">gouvernement.fr</a>
-                  </li>
-                  <li class="fr-footer__content-item">
-                      <a class="fr-footer__content-link" href="https://service-public.fr">service-public.fr</a>
-                  </li>
-                  <li class="fr-footer__content-item">
-                      <a class="fr-footer__content-link" href="https://data.gouv.fr">data.gouv.fr</a>
-                  </li>
-              </ul>
-          </div>
-      </div>
-      <div class="fr-footer__bottom">
-          <ul class="fr-footer__bottom-list">
-
-              <li class="fr-footer__bottom-item">
-                  <a href="/s/terms-of-use" class="fr-footer__bottom-link">Mentions légales</a>
-              </li>
-
-              <li class="fr-footer__bottom-item">
-                  <a href="/s/suivi/" class="fr-footer__bottom-link">Données personnelles et cookies</a>
-              </li>
-
-              <li class="fr-footer__bottom-item">
-                  <a href="/s/accessibilite/" class="fr-footer__bottom-link">Accessibilité : non conforme</a>
-              </li>
-
-              <li class="fr-footer__bottom-item">
-                  <label for="ui_locale" class="fr-footer__bottom-link">Langue de l’interface</label>
-                  <select id="ui_locale" class="fr-select ui-locale" ></select>
-              </li>
-
-          </ul>
-      </div>
-    </div>
-</footer>
 <!-- delete history modal -->
 <div class="modal fade delete-history-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
