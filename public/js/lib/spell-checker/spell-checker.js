@@ -20,6 +20,7 @@ import config from '../editor/config'
 // SpellChecker configurations
 const SPELLING_ERRORS_TYPES = ['misspelling']
 const BASE_STYLE_CSS_CLASS = 'spell-check'
+const EDITOR_LINE_HEIGHT = 22.5
 export const DELETE_DOUBLE_SPACE_VALUE = 'Supprimer les doubles espaces'
 
 export function SpellChecker (mode, codeMirrorInstance) {
@@ -133,7 +134,7 @@ SpellChecker.hasError = (token) => {
   return token && token.state && token.state.overlayCur && token.state.overlayCur.includes(BASE_STYLE_CSS_CLASS)
 }
 
-SpellChecker.getOverlayPosition = (cursorPosition) => {
+SpellChecker.positionOverlay = (cursorPosition, overlay) => {
   const bottomSpace = window.innerHeight - cursorPosition.bottom
   const rightSpace = window.innerWidth - cursorPosition.right
 
@@ -141,26 +142,22 @@ SpellChecker.getOverlayPosition = (cursorPosition) => {
   let top = cursorPosition.top
   let left = cursorPosition.left
 
-  // FIXME: hardcoded values
-  const overlay = {
-    width: 300,
-    height: 162
-  }
-
   // If there is limited space at the bottom, position the overlay on the top
-  if (bottomSpace < overlay.height) {
-    top -= overlay.height + 10
+  if (bottomSpace < overlay.offsetHeight) {
+    // Determined empirically based on practical testing and adjustments
+    top -= overlay.offsetHeight + EDITOR_LINE_HEIGHT * 0.5
   } else {
-    // FIXME: arbitrary hardcoded value to open overlay slightly under the cursor
-    top += 30 // Assuming a standard lineheight
+    // Determined empirically based on practical testing and adjustments
+    top += EDITOR_LINE_HEIGHT + EDITOR_LINE_HEIGHT * 0.3
   }
 
   // If there is limited space at the right, position the overlay on the left side
-  if (rightSpace < overlay.width) {
-    left -= overlay.width
+  if (rightSpace < overlay.offsetWidth) {
+    left -= overlay.offsetWidth - rightSpace
   }
 
-  return { top, left }
+  overlay.style.left = `${left}px`
+  overlay.style.top = `${top}px`
 }
 
 /**
@@ -232,11 +229,6 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
     </div>
   `
 
-  // Position the overlay
-  const { top, left } = SpellChecker.getOverlayPosition(position)
-  overlay.style.left = `${left}px`
-  overlay.style.top = `${top}px`
-
   // Handle click interactions on suggestions
   // FIXME: Should be improved ASAP, only work with a mouse.
   overlay.addEventListener('click', function (event) {
@@ -250,8 +242,15 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
   SpellChecker._overlay = overlay
   SpellChecker._openMatch = match
 
-  // Append the overlay to the document body
+  // Hide the overlay to measure its size accurately while positioning
+  // The overlay needs to be part of the DOM.
+  overlay.style.visibility = 'hidden'
   document.body.appendChild(overlay)
+
+  SpellChecker.positionOverlay(position, overlay)
+
+  // Make it visible after positioning
+  overlay.style.visibility = 'visible'
 
   // Handle click interactions on close button
   const closeButton = document.getElementById('close-overlay')
