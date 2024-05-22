@@ -238,6 +238,7 @@ SpellChecker.openOverlay = (match, position, onReplacementSelection) => {
   overlay.style.top = `${top}px`
 
   // Handle click interactions on suggestions
+  // FIXME: Should be improved ASAP, only work with a mouse.
   overlay.addEventListener('click', function (event) {
     if (event.target.tagName === 'LI') {
       onReplacementSelection(event.target.textContent)
