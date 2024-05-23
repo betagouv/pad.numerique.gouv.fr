@@ -94,3 +94,53 @@
 .spell-check-overlay li:hover {
   background-color: rgb(25, 118, 240);
 }
+
+.spell-check-status {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(35, 154, 255);
+  color: white;
+  z-index: 9999;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 10px;
+  /* Center the spinner content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spell-check-status.loading::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: white;
+  animation: spinner .6s ease infinite;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spell-check-status.error {
+  background-color: rgba(255,0,0,.8);
+}
+
+#status-infinity-icon, #status-errors-count, #status-network-error-icon {
+  display: none;
+}
+
+#status-check-icon {
+  display: block;
+}
+

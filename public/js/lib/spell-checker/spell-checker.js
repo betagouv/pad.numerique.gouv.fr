@@ -21,6 +21,7 @@ import config from '../editor/config'
 const SPELLING_ERRORS_TYPES = ['misspelling']
 const BASE_STYLE_CSS_CLASS = 'spell-check'
 const EDITOR_LINE_HEIGHT = 22.5
+const MIN_LOADING_TIME = 500
 export const DELETE_DOUBLE_SPACE_VALUE = 'Supprimer les doubles espaces'
 
 export function SpellChecker (mode, codeMirrorInstance) {
@@ -90,6 +91,8 @@ export function SpellChecker (mode, codeMirrorInstance) {
 
 SpellChecker.data = null
 SpellChecker._overlay = null
+SpellChecker._status = null
+SpellChecker._loadingStartTime = null
 SpellChecker._openMatch = null
 SpellChecker.currentRequest = null
 
@@ -100,6 +103,9 @@ SpellChecker.currentRequest = null
  * @param {object} editor - The CodeMirror editor instance.
  */
 SpellChecker.fetchData = (editor) => {
+  SpellChecker.initStatus()
+  SpellChecker.startSpinner()
+
   SpellChecker.currentRequest = $.post(`${serverurl}/check/`, {
     text: editor.getValue(),
     language: 'auto',
@@ -118,10 +124,16 @@ SpellChecker.fetchData = (editor) => {
       }
       SpellChecker.data = data
       SpellChecker.render(editor)
+      SpellChecker.stopSpinner()
+      SpellChecker.updateStatus(data.matches)
     })
     .fail((err) => {
       if (debug) {
         console.debug(err)
+      }
+      SpellChecker.stopSpinner()
+      if (err.statusText !== 'abort') {
+        SpellChecker.updateStatus(null, true)
       }
     })
 }
@@ -272,13 +284,29 @@ SpellChecker.closeOverlay = () => {
   }
 }
 
+SpellChecker.closeStatus = () => {
+  // Get the current status
+  const status = SpellChecker._status
+
+  // Close the status if open
+  if (status) {
+    status.parentNode.removeChild(status)
+    // Clear SpellChecker's state
+    SpellChecker._status = null
+  }
+}
+
 SpellChecker.reset = () => {
   // Close the overlay if open
   SpellChecker.closeOverlay()
 
+  // Close the status if open
+  SpellChecker.closeStatus()
+
   // Reset SpellChecker's state
   SpellChecker.data = null
   SpellChecker._overlay = null
+  SpellChecker._status = null
   SpellChecker._openMatch = null
 }
 
@@ -342,6 +370,144 @@ SpellChecker.updateMatchIndexes = (change) => {
 
     return match
   })
+}
+
+SpellChecker.updateStatus = (matches, networkError = false) => {
+  const status = document.querySelector('.spell-check-status')
+
+  if (!status) {
+    return
+  }
+
+  const checkIcon = status.querySelector('#status-check-icon')
+  const networkErrorIcon = status.querySelector('#status-network-error-icon')
+  const errorsCount = status.querySelector('#status-errors-count')
+  const infinityIcon = status.querySelector('#status-infinity-icon')
+
+  if (networkError) {
+    status.classList.add('error')
+
+    // Display the network error icon and hide others
+    networkErrorIcon.style.display = 'block'
+    infinityIcon.style.display = 'none'
+    errorsCount.style.display = 'none'
+    checkIcon.style.display = 'none'
+
+    return
+  } else {
+    // Hide the network error icon
+    networkErrorIcon.style.display = 'none'
+  }
+
+  if (matches && matches.length) {
+    const hasMoreThanTwoDigits = matches.length < 100
+    if (hasMoreThanTwoDigits) {
+      // Display the errors count and hide others
+      errorsCount.textContent = matches.length
+      infinityIcon.style.display = 'none'
+      errorsCount.style.display = 'block'
+    } else {
+      // Display the infinity icon and hide others
+      infinityIcon.style.display = 'block'
+      errorsCount.style.display = 'none'
+    }
+    status.classList.add('error')
+    checkIcon.style.display = 'none'
+  } else {
+    // Display the check icon and hide others
+    checkIcon.style.display = 'block'
+    errorsCount.textContent = ''
+    status.classList.remove('error')
+    errorsCount.style.display = 'none'
+    infinityIcon.style.display = 'none'
+  }
+}
+
+SpellChecker.startSpinner = () => {
+  const status = document.querySelector('.spell-check-status')
+  if (!status) {
+    return
+  }
+  status.classList.add('loading')
+  SpellChecker._loadingStartTime = Date.now()
+}
+
+SpellChecker.stopSpinner = () => {
+  const status = document.querySelector('.spell-check-status')
+  if (!status) {
+    return
+  }
+  // Ensures the loading spinner is displayed for a minimum duration (MIN_LOADING_TIME)
+  // to prevent flickering and provide a consistent user experience.
+  let remainingTime = 0
+  if (SpellChecker._loadingStartTime) {
+    const timeElapsed = Date.now() - SpellChecker._loadingStartTime
+    remainingTime = MIN_LOADING_TIME - timeElapsed
+  }
+  setTimeout(() => {
+    status.classList.remove('loading')
+    SpellChecker._loadingStartTime = null
+  }, Math.min(remainingTime, 0))
+}
+
+SpellChecker.initStatus = () => {
+  // If the status element is already initialized, return early to avoid duplication
+  if (SpellChecker._status) {
+    return
+  }
+
+  // Only display visual elements if the feature is enabled
+  if (SpellChecker.featureFlag !== SpellCheckerFeatureFlags.ENABLED) {
+    return
+  }
+
+  const status = document.createElement('div')
+  status.className = 'spell-check-status'
+
+  const codeMirrorEditor = document.querySelector('.CodeMirror')
+
+  SpellChecker._status = status
+
+  /**
+   * Network error icon from bootstrap (displayed when network requests are failing).
+   * @see {@link https://icons.getbootstrap.com/icons/x/}
+   */
+  const errorIcon = `
+    <svg id="status-network-error-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+    </svg>
+  `
+  /**
+   * Check icon from bootstrap, displayed by default.
+   * @see {@link https://icons.getbootstrap.com/icons/check/}
+   */
+  const checkIcon = `
+    <svg id="status-check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+    </svg>
+  `
+  /**
+   * Infinity icon from bootstrap (displayed when the number of errors has more than 2 digits).
+   * @see {@link https://icons.getbootstrap.com/icons/infinity/}
+   */
+  const infinityIcon = `
+    <svg id="status-infinity-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M5.68 5.792 7.345 7.75 5.681 9.708a2.75 2.75 0 1 1 0-3.916ZM8 6.978 6.416 5.113l-.014-.015a3.75 3.75 0 1 0 0 5.304l.014-.015L8 8.522l1.584 1.865.014.015a3.75 3.75 0 1 0 0-5.304l-.014.015zm.656.772 1.663-1.958a2.75 2.75 0 1 1 0 3.916z"/>
+    </svg>
+  `
+  // Build and set the HTML content of the status element
+  // The status element is responsible for showing the current document state, the number of spell or grammar errors,
+  // network errors, and the loading spinner while fetching data
+  status.innerHTML = `
+    <div>
+      ${checkIcon}
+      ${infinityIcon}
+      ${errorIcon}
+      <div id="status-errors-count"></div>
+    </div>
+  `
+
+  codeMirrorEditor.appendChild(status)
 }
 
 /**
