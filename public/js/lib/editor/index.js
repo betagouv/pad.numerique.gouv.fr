@@ -560,7 +560,7 @@ export default class Editor {
 
     const htmlStatusSpellCheck = `
       <div class="status-spellcheck">
-        <a class="ui-spellcheck-toggle" title="Toggle spellcheck"><i class="fa fa-check fa-fw"></i></a>
+        <a class="ui-spellcheck-toggle" title="Correction orthographique"><i class="fa fa-check fa-fw"></i></a>
       </div>
     `
 
