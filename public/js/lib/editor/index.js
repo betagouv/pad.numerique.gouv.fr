@@ -79,7 +79,9 @@ import '@hedgedoc/codemirror-5/mode/vhdl/vhdl.js'
 import '@hedgedoc/codemirror-5/mode/xml/xml.js'
 import '@hedgedoc/codemirror-5/mode/yaml-frontmatter/yaml-frontmatter.js'
 import '@hedgedoc/codemirror-5/mode/yaml/yaml.js'
-import '../../../vendor/codemirror-spell-checker/spell-checker.min.js'
+import {
+  SpellChecker, SpellCheckerFeatureFlags
+} from '../spell-checker/spell-checker.js'
 
 import '../../../vendor/inlineAttachment/inline-attachment'
 import '../../../vendor/inlineAttachment/codemirror.inline-attachment'
@@ -93,7 +95,7 @@ import '../../../css/ui/toolbar.css'
 
 /* config section */
 const isMac = CodeMirror.keyMap.default === CodeMirror.keyMap.macDefault
-const defaultEditorMode = 'gfm'
+const defaultEditorMode = config.defaultMode
 const viewportMargin = 20
 
 const jumpToAddressBarKeymapName = isMac ? 'Cmd-L' : 'Ctrl-L'
@@ -326,7 +328,6 @@ export default class Editor {
     this.statusKeymap = this.statusBar.find('.status-keymap')
     this.statusLength = this.statusBar.find('.status-length')
     this.statusTheme = this.statusBar.find('.status-theme')
-    this.statusSpellcheck = this.statusBar.find('.status-spellcheck')
     this.statusPreferences = this.statusBar.find('.status-preferences')
     this.statusPanel = this.editor.addPanel(this.statusBar[0], {
       position: 'bottom'
@@ -547,58 +548,79 @@ export default class Editor {
   }
 
   setSpellcheck () {
+    if (SpellChecker.featureFlag === SpellCheckerFeatureFlags.DISABLED) {
+      return
+    }
+
+    if (SpellChecker.featureFlag === SpellCheckerFeatureFlags.HEADLESS) {
+      this.editor.setOption('mode', config.spellCheckerMode)
+      SpellChecker.fetchData(this.editor)
+      return
+    }
+
+    const htmlStatusSpellCheck = `
+      <div class="status-spellcheck">
+        <a class="ui-spellcheck-toggle" title="Correction orthographique"><i class="fa fa-check fa-fw"></i></a>
+      </div>
+    `
+
+    const statusIndicators = document.querySelector('.status-indicators')
+    statusIndicators.insertAdjacentHTML('beforeend', htmlStatusSpellCheck)
+
+    this.statusSpellcheck = this.statusBar.find('.status-spellcheck')
+    const spellcheckToggle = this.statusSpellcheck.find('.ui-spellcheck-toggle')
+
     const cookieSpellcheck = Cookies.get('spellcheck')
     if (cookieSpellcheck) {
       let mode = null
       if (cookieSpellcheck === 'true' || cookieSpellcheck === true) {
-        mode = 'spell-checker'
+        mode = config.spellCheckerMode
       } else {
+        SpellChecker.reset()
         mode = defaultEditorMode
       }
       if (mode && mode !== this.editor.getOption('mode')) {
-        this.editor.setOption('mode', mode)
-      }
-    }
-
-    const spellcheckToggle = this.statusSpellcheck.find('.ui-spellcheck-toggle')
-
-    const checkSpellcheck = () => {
-      const mode = this.editor.getOption('mode')
-      if (mode === defaultEditorMode) {
-        spellcheckToggle.removeClass('active')
-      } else {
-        spellcheckToggle.addClass('active')
+        if (mode === defaultEditorMode) {
+          spellcheckToggle.removeClass('active')
+          this.editor.setOption('mode', mode)
+        } else {
+          SpellChecker.fetchData(this.editor)
+          spellcheckToggle.addClass('active')
+        }
       }
     }
 
     spellcheckToggle.click(() => {
       let mode = this.editor.getOption('mode')
       if (mode === defaultEditorMode) {
-        mode = 'spell-checker'
+        mode = config.spellCheckerMode
       } else {
+        SpellChecker.reset()
         mode = defaultEditorMode
       }
       if (mode && mode !== this.editor.getOption('mode')) {
-        this.editor.setOption('mode', mode)
+        if (mode === defaultEditorMode) {
+          spellcheckToggle.removeClass('active')
+          this.editor.setOption('mode', mode)
+        } else {
+          SpellChecker.fetchData(this.editor)
+          spellcheckToggle.addClass('active')
+        }
       }
-      Cookies.set('spellcheck', mode === 'spell-checker', {
+      Cookies.set('spellcheck', mode === config.spellCheckerMode, {
         expires: 365,
         sameSite: window.cookiePolicy,
         secure: window.location.protocol === 'https:'
       })
-
-      checkSpellcheck()
     })
-
-    checkSpellcheck()
 
     // workaround spellcheck might not activate beacuse the ajax loading
     if (window.num_loaded < 2) {
       const spellcheckTimer = setInterval(
         () => {
           if (window.num_loaded >= 2) {
-            if (this.editor.getOption('mode') === 'spell-checker') {
-              this.editor.setOption('mode', 'spell-checker')
+            if (this.editor.getOption('mode') === config.spellCheckerMode) {
+              this.editor.setOption('mode', config.spellCheckerMode)
             }
             clearInterval(spellcheckTimer)
           }
@@ -661,6 +683,8 @@ export default class Editor {
   }
 
   init (textit) {
+    SpellChecker(config.spellCheckerMode, CodeMirror)
+
     this.editor = CodeMirror.fromTextArea(textit, {
       mode: defaultEditorMode,
       backdrop: defaultEditorMode,

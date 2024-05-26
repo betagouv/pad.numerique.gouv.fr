@@ -1,0 +1,152 @@
+/**
+ * Spell-checker Error and Warning Styling Documentation.
+ * Applied within CodeMirror for visual cues during text editing.
+ */
+
+.CodeMirror .cm-spell-check-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word){
+  border-bottom:2px dotted rgba(255,0,0,.8)
+}
+
+.CodeMirror .cm-spell-check-warning:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word){
+  border-bottom:2px dotted rgba(255,0128,0,.8)
+}
+
+.spell-check-overlay {
+  position: fixed;
+  max-width: 320px;
+  height: auto;
+  background-color: #f1f3f9;
+  z-index: 9999;
+  padding: 8px 6px 6px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.spell-check-overlay button {
+  height: 20px;
+  width: 20px;
+  padding: 2px 0;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  background: none;
+  border: none;
+}
+
+.spell-check-overlay button:hover {
+  background-color: #dee3ed;
+}
+
+.spell-check-overlay .content {
+  background-color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 8px;
+}
+
+.spell-check-overlay .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.spell-check-overlay .title {
+  color: #2f3237;
+  font-size: 14px;
+  padding-left: 8px;
+  margin-bottom: 8px;
+  line-height: 20px;
+}
+
+.spell-check-overlay .subtitle {
+  color: #5e636e;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.spell-check-overlay .message {
+  color: #2f3237;
+  line-height: 1.42857;
+  margin: 8px 0;
+}
+
+.spell-check-overlay ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-items: start;
+  gap: 4px;
+  padding-left: 0;
+}
+
+.spell-check-overlay li {
+  cursor: pointer;
+  background-color: rgb(35, 154, 255);
+  transition: background-color 0.3s ease;
+  color: white;
+  border-radius: 4px;
+  line-height: 25px;
+  padding: 0 8px 3px;
+  display: inline-block;
+}
+
+.spell-check-overlay li:hover {
+  background-color: rgb(25, 118, 240);
+}
+
+.spell-check-status {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(35, 154, 255);
+  color: white;
+  z-index: 9999;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 10px;
+  /* Center the spinner content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.spell-check-status:hover, .spell-check-status:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.spell-check-status.loading::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: white;
+  animation: spinner .6s ease infinite;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spell-check-status.error {
+  background-color: rgba(255,0,0,.8);
+}
+
+#status-infinity-icon, #status-errors-count, #status-network-error-icon {
+  display: none;
+}
+
+#status-check-icon {
+  display: block;
+}
+

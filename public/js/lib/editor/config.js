@@ -1,5 +1,7 @@
 const config = {
-  docmaxlength: null
+  docmaxlength: null,
+  defaultMode: 'gfm',
+  spellCheckerMode: 'spell-checker'
 }
 
 export default config

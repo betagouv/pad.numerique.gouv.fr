@@ -147,6 +147,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].[contenthash].css'
+    }),
+    new webpack.EnvironmentPlugin({
+      SPELL_CHECKER_FEATURE_FLAG: 'headless',
+      SPELL_CHECKER_TYPING_TIMEOUT_DURATION: 500,
+      SPELL_CHECKER_MAXIMUM_NUMBER_OF_REPLACEMENTS: 5,
     })
   ],
 
@@ -187,7 +192,6 @@ module.exports = {
       path.join(__dirname, 'public/js/index.js')
     ],
     'index-styles': [
-      path.join(__dirname, 'public/vendor/codemirror-spell-checker/spell-checker.min.css'),
       path.join(__dirname, 'node_modules/@hedgedoc/codemirror-5/lib/codemirror.css'),
       path.join(__dirname, 'node_modules/@hedgedoc/codemirror-5/addon/fold/foldgutter.css'),
       path.join(__dirname, 'node_modules/@hedgedoc/codemirror-5/addon/display/fullscreen.css'),
@@ -316,15 +320,6 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: require.resolve(path.join(__dirname, 'public/vendor/codemirror-spell-checker/spell-checker.min.js')),
-        use: {
-          loader: 'imports-loader',
-          options: {
-            imports: ['default @hedgedoc/codemirror-5 CodeMirror']
-          }
-        }
-      },
       {
         test: require.resolve(path.join(__dirname, 'public/vendor/ot/ot.min.js')),
         use: {
