@@ -460,8 +460,11 @@ SpellChecker.initStatus = () => {
     return
   }
 
-  const status = document.createElement('div')
+  const status = document.createElement('a')
   status.className = 'spell-check-status'
+  status.title = 'Feedbacks'
+  status.target = '_blank'
+  status.href = 'https://grist.incubateur.net/o/docs/forms/mxmyvAB6sBThkX5CarmwZt/4'
 
   const codeMirrorEditor = document.querySelector('.CodeMirror')
 
@@ -498,12 +501,10 @@ SpellChecker.initStatus = () => {
   // The status element is responsible for showing the current document state, the number of spell or grammar errors,
   // network errors, and the loading spinner while fetching data
   status.innerHTML = `
-    <div>
-      ${checkIcon}
-      ${infinityIcon}
-      ${errorIcon}
-      <div id="status-errors-count"></div>
-    </div>
+    ${checkIcon}
+    ${infinityIcon}
+    ${errorIcon}
+    <div id="status-errors-count"></div>
   `
 
   codeMirrorEditor.appendChild(status)
