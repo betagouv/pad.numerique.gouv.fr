@@ -104,10 +104,19 @@ SpellChecker.currentRequest = null
  */
 SpellChecker.fetchData = (editor) => {
   SpellChecker.initStatus()
+
+  const text = editor.getValue()
+
+  // This is for performance optimization to avoid spamming the server with many empty requests.
+  if (text.length < process.env.SPELL_CHECKER_MINIMUM_CHAR_LIMIT) {
+    SpellChecker.updateState(null, editor)
+    return
+  }
+
   SpellChecker.startSpinner()
 
   SpellChecker.currentRequest = $.post(`${serverurl}/check/`, {
-    text: editor.getValue(),
+    text,
     language: 'fr'
   })
     .done(data => {
@@ -121,10 +130,8 @@ SpellChecker.fetchData = (editor) => {
       if (debug) {
         console.debug(data)
       }
-      SpellChecker.data = data
-      SpellChecker.render(editor)
+      SpellChecker.updateState(data, editor)
       SpellChecker.stopSpinner()
-      SpellChecker.updateStatus(data.matches)
     })
     .fail((err) => {
       if (debug) {
@@ -135,6 +142,16 @@ SpellChecker.fetchData = (editor) => {
         SpellChecker.updateStatus(null, true)
       }
     })
+}
+
+SpellChecker.updateState = (data, editor) => {
+  SpellChecker.data = data
+  if (data) {
+    SpellChecker.updateStatus(data.matches)
+  } else {
+    SpellChecker.updateStatus([])
+  }
+  SpellChecker.render(editor)
 }
 
 SpellChecker.render = (editor) => {
