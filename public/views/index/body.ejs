@@ -121,6 +121,14 @@
                                                     </a>
                                                 </li>
                                             <% } %>
+                                            <% if (authProviders.agentConnect) { %>
+                                                <li class="ui-signin" style="<% if(signin) { %> display: none;<% } %>">
+                                                    <!-- TODO : replace with Agent Connect Button -->
+                                                    <a class="fr-btn fr-btn--lg" href="<%- serverURL %>/auth/agent-connect">
+                                                        <%= __('Sign In') %>
+                                                    </a>
+                                                </li>
+                                            <% } %>
                                             <li>
                                                 <a href="#" class="ui-history fr-btn fr-btn--lg" style="min-width: 200px;">Historique</a>
                                             </li>
@@ -133,7 +141,7 @@
                                             <li>
                                                 <a href="<%- serverURL %>/features" class="fr-btn fr-btn--lg fr-btn--secondary">Fonctionnalités</a>
                                             </li>
-                                        </p>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

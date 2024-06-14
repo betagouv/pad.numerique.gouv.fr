@@ -123,6 +123,12 @@
                     </div>
                 </form>
                 <% }%>
+                <% if (authProviders.agentConnect) { %>
+                    <!-- todo: replace by the agent connect button -->
+                    <a href="<%- serverURL %>/auth/agent-connect" class="btn btn-lg btn-block btn-social btn-soundcloud">
+                        <i class="fa fa-mail-forward"></i> <%= __('Sign in via %s', authProviders.oauth2ProviderName || 'OAuth2') %>
+                    </a>
+                <% } %>
             </div>
         </div>
     </div>
