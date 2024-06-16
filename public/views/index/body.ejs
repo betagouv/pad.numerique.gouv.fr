@@ -58,7 +58,7 @@
                                         <li><a><i class="fa fa-user fa-fw"></i> <span class="ui-name"></span></a></li>
                                         <li><a href="<%- serverURL %>/me/export"><i class="fa fa-cloud-download fa-fw"></i> <%= __('Export user data') %></a></li>
                                         <li><a class="ui-delete-user" data-toggle="modal" data-target=".delete-user-modal"><i class="fa fa-trash fa-fw"></i> <%= __('Delete user') %></a></li>
-                                        <li><a href="<%- serverURL %>/logout"><i class="fa fa-sign-out fa-fw"></i> <%= __('Sign Out') %></li>
+                                        <li><a href="<% if (authProviders.agentConnect) { %><%- serverURL %>/auth/agent-connect/logout<% } else { %><%- serverURL %>/logout<% } %>"><i class="fa fa-sign-out fa-fw"></i> <%= __('Sign Out') %></a></li>
                                     </ul>
                                 </li>
                                 <li class="lasuite-onlymobile ui-signout" style="<% if(!signin) { %> display: none;<% } %>">
@@ -72,7 +72,7 @@
                                     </a>
                                 </li>
                                 <li class="lasuite-onlymobile ui-signout" style="<% if(!signin) { %> display: none;<% } %>">
-                                    <a class="fr-btn lasuite-ellipsis" href="<%- serverURL %>/logout">
+                                    <a class="fr-btn lasuite-ellipsis" href="<% if (authProviders.agentConnect) { %><%- serverURL %>/auth/agent-connect/logout<% } else { %><%- serverURL %>/logout<% } %>">
                                         <i class="fa fa-sign-out fa-fw"></i> <%= __('Sign Out') %> (<span class="ui-name"></span>)
                                     </a>
                                 </li>
