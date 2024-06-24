@@ -267,3 +267,16 @@ select {
 .cover-heading img {
     max-width: 100%;
 }
+
+.beta-tag {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -0.02rem;
+  padding: 0 0.25rem;
+  background: var(--lasuite-primary);
+  color: white;
+  font-size: 0.625rem;
+  border-radius: 0 0.1875rem 0 0.1875rem;
+  margin: 0 0 0.9375rem 0.3125rem;
+  line-height: 1rem;
+}
