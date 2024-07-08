@@ -72,8 +72,12 @@ setloginStateChangeEvent(pageInit)
 pageInit()
 
 function pageInit () {
+
   checkIfAuth(
     data => {
+
+      console.log('yes, already logged')
+
       $('.ui-signin').hide()
       $('.ui-or').hide()
       $('.ui-welcome').show()
@@ -85,6 +89,15 @@ function pageInit () {
       parseServerToHistory(historyList, parseHistoryCallback)
     },
     () => {
+      console.log('no, try silent login')
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const error = urlParams.get('error');
+
+      if (!error || error !== 'login_required') {
+        window.location.href = "/auth/agent-connect?silent=true";
+      }
+
       $('.ui-signin').show()
       $('.ui-or').show()
       $('.ui-welcome').hide()
