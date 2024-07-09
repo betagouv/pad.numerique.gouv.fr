@@ -1271,6 +1271,7 @@ __metadata:
     html-webpack-plugin: 4.5.2
     i18n: 0.15.1
     imports-loader: 1.2.0
+    intro.js: 7.2.0
     ionicons: 2.0.1
     is-svg: 4.4.0
     jquery: 3.7.1
@@ -7935,6 +7936,13 @@ __metadata:
   version: 2.2.0
   resolution: "interpret@npm:2.2.0"
   checksum: f51efef7cb8d02da16408ffa3504cd6053014c5aeb7bb8c223727e053e4235bf565e45d67028b0c8740d917c603807aa3c27d7bd2f21bf20b6417e2bb3e5fd6e
+  languageName: node
+  linkType: hard
+
+"intro.js@npm:7.2.0":
+  version: 7.2.0
+  resolution: "intro.js@npm:7.2.0"
+  checksum: 466b95f64d746890e1dce20c28c9813e74ea238fbd7270abf90997c1e70d8ad146a7035feee02f47a5b9328b65fdc54a4b2c204bfca07c605f18122d888de3a3
   languageName: node
   linkType: hard
 
