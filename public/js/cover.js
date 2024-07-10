@@ -66,16 +66,6 @@ const options = {
 }
 const historyList = new List('history', options)
 
-function removeURLParameter (paramName, requiredPathname) {
-  const currentUrl = new URL(window.location.href)
-  // If a specific pathname is provided, ensure it matches the current URL's pathname.
-  if (requiredPathname && currentUrl.pathname !== requiredPathname) {
-    return
-  }
-  currentUrl.searchParams.delete(paramName)
-  window.history.replaceState({}, document.title, currentUrl.toString())
-}
-
 window.migrateHistoryFromTempCallback = pageInit
 setloginStateChangeEvent(pageInit)
 
@@ -95,7 +85,6 @@ function pageInit () {
       parseServerToHistory(historyList, parseHistoryCallback)
     },
     () => {
-      removeURLParameter('error', '/')
       $('.ui-signin').show()
       $('.ui-or').show()
       $('.ui-welcome').hide()
