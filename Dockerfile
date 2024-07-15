@@ -8,11 +8,15 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
 
 WORKDIR /app
 
-COPY package.json yarn.lock .
-
 COPY ./bin/heroku ./bin/heroku
 
-RUN yarn
+RUN corepack enable yarn
+
+COPY package.json yarn.lock .yarnrc.yml ./
+
+COPY .yarn .yarn/
+
+RUN yarn install
 
 COPY . .
 
