@@ -154,3 +154,10 @@
   box-shadow: white 0 0 1px 2px, rgba(33, 33, 33, 0.7) 0 0 0 5000px !important;
 }
 
+/**
+* IntroJs defaults to showing a checkbox that we don't want.
+* Tour should always be shown once; No user choice.
+*/
+.introjs-dontShowAgain {
+  display: none !important;
+}

@@ -10,6 +10,7 @@ export function initTutorial () {
   }
 
   introJs().setOptions({
+    dontShowAgain: true, // Override styles to hide the checkbox
     nextLabel: 'Suivant',
     prevLabel: 'Précédent',
     doneLabel: 'Terminé',
@@ -28,6 +29,9 @@ export function initTutorial () {
       }
     ]
   }).start()
+  // Set a cookie to prevent showing the tutorial again
+  // This ensures the tutorial is shown only once
+  introJs().setDontShowAgain(true)
 }
 
 export function closeTutorial () {
