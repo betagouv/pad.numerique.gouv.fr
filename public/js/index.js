@@ -87,6 +87,7 @@ import modeType from './lib/modeType'
 import appState from './lib/appState'
 import { SpellChecker, DELETE_DOUBLE_SPACE_VALUE } from './lib/spell-checker/spell-checker'
 import config from './lib/editor/config'
+import { closeTutorial, initTutorial } from './lib/spell-checker/tutorial'
 
 require('../vendor/showup/showup')
 
@@ -1155,6 +1156,12 @@ function changeMode (type) {
     modeIcon.addClass('fa-pencil')
   }
   unlockNavbar()
+
+  if (appState.currentMode !== modeType.view) {
+    initTutorial()
+  } else {
+    closeTutorial()
+  }
 }
 
 function lockNavbar () {
