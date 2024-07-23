@@ -6,6 +6,7 @@ export function initTutorial () {
     nextLabel: 'Suivant',
     prevLabel: 'Précédent',
     doneLabel: 'Terminé',
+    highlightClass: 'custom-introjs-helperLayer',
     steps: [
       {
         title: 'Nouveauté',
