@@ -7,6 +7,7 @@ export function initTutorial () {
     prevLabel: 'Précédent',
     doneLabel: 'Terminé',
     highlightClass: 'custom-introjs-helperLayer',
+    showBullets: false,
     steps: [
       {
         title: 'Nouveauté',
