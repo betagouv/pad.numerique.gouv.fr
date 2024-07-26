@@ -138,7 +138,7 @@
 }
 
 .spell-check-status.error {
-  background-color: rgba(255,0,0,.8);
+  background-color: rgba(255,0,0,1);
 }
 
 #status-infinity-icon, #status-errors-count, #status-network-error-icon {
