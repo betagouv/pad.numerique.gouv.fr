@@ -570,7 +570,7 @@ export default class Editor {
     this.statusSpellcheck = this.statusBar.find('.status-spellcheck')
     const spellcheckToggle = this.statusSpellcheck.find('.ui-spellcheck-toggle')
 
-    const cookieSpellcheck = Cookies.get('spellcheck')
+    const cookieSpellcheck = Cookies.get('spellcheck-v2')
     if (cookieSpellcheck) {
       let mode = null
       if (cookieSpellcheck === 'true' || cookieSpellcheck === true) {
@@ -588,6 +588,10 @@ export default class Editor {
           spellcheckToggle.addClass('active')
         }
       }
+    } else if (cookieSpellcheck === undefined) {
+      this.editor.setOption('mode', config.spellCheckerMode)
+      SpellChecker.fetchData(this.editor)
+      spellcheckToggle.addClass('active')
     }
 
     spellcheckToggle.click(() => {
@@ -607,7 +611,7 @@ export default class Editor {
           spellcheckToggle.addClass('active')
         }
       }
-      Cookies.set('spellcheck', mode === config.spellCheckerMode, {
+      Cookies.set('spellcheck-v2', mode === config.spellCheckerMode, {
         expires: 365,
         sameSite: window.cookiePolicy,
         secure: window.location.protocol === 'https:'
