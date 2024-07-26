@@ -125,7 +125,7 @@ export default class Editor {
       Tab: function (cm) {
         const tab = '\t'
 
-        // contruct x length spaces
+        // construct x length spaces
         const spaces = Array(parseInt(cm.getOption('indentUnit')) + 1).join(' ')
 
         // auto indent whole line when in list or blockquote
@@ -614,7 +614,7 @@ export default class Editor {
       })
     })
 
-    // workaround spellcheck might not activate beacuse the ajax loading
+    // workaround spellcheck might not activate because the ajax loading
     if (window.num_loaded < 2) {
       const spellcheckTimer = setInterval(
         () => {
