@@ -15,6 +15,7 @@ export function initTutorial () {
     prevLabel: 'Précédent',
     doneLabel: 'Terminé',
     highlightClass: 'custom-introjs-helperLayer',
+    dontShowAgainCookie: 'spellcheck-tutorial-dontShowAgain',
     showBullets: false,
     disableInteraction: true,
     exitOnOverlayClick: false,
