@@ -9,13 +9,15 @@ export function initTutorial () {
     return
   }
 
-  introJs().setOptions({
+  const intro = introJs().setOptions({
     dontShowAgain: true, // Override styles to hide the checkbox
     nextLabel: 'Suivant',
     prevLabel: 'Précédent',
     doneLabel: 'Terminé',
     highlightClass: 'custom-introjs-helperLayer',
     showBullets: false,
+    disableInteraction: true,
+    exitOnOverlayClick: false,
     steps: [
       {
         title: 'Nouveauté',
@@ -28,10 +30,12 @@ export function initTutorial () {
         element: spellCheckStatus
       }
     ]
-  }).start()
-  // Set a cookie to prevent showing the tutorial again
-  // This ensures the tutorial is shown only once
-  introJs().setDontShowAgain(true)
+  })
+  intro.onexit(() => {
+    document.querySelector('body').classList.remove('introjs-tour')
+    intro.setDontShowAgain(true)
+  })
+  intro.start()
 }
 
 export function closeTutorial () {
