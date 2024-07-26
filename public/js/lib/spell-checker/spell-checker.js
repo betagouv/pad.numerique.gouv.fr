@@ -477,11 +477,8 @@ SpellChecker.initStatus = () => {
     return
   }
 
-  const status = document.createElement('a')
+  const status = document.createElement('div')
   status.className = 'spell-check-status'
-  status.title = 'Feedbacks'
-  status.target = '_blank'
-  status.href = 'https://grist.incubateur.net/o/docs/forms/mxmyvAB6sBThkX5CarmwZt/4'
 
   const codeMirrorEditor = document.querySelector('.CodeMirror')
 

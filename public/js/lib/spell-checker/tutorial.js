@@ -21,13 +21,18 @@ export function initTutorial () {
     steps: [
       {
         title: 'Nouveauté',
-        intro: "La correction orthographique est disponible en version bêta. Vous pouvez l'activer ou la désactiver en cochant cette case.",
+        intro: "Un correcteur d’orthographe et de grammaire est disponible en version bêta. Vous pouvez l'activer ou la désactiver en cochant cette case.",
         element: spellCheckToggle
       },
       {
-        title: 'Alertes et retours',
-        intro: "Cette icône vous alerte en temps réel sur l'orthographe de votre document. \n\nLors de la rédaction d'un document, cliquez dessus pour nous partager vos retours sur la fonctionnalité.",
+        title: 'Temps réel',
+        intro: "Il corrige et reformule vos phrases en temps réel. Ce statut vous informera de l'état de votre document.",
         element: spellCheckStatus
+      },
+      {
+        title: 'Retours',
+        intro: 'Une fois le tutoriel terminé, cliquez à tout moment sur ce lien pour partager vos retours.',
+        element: document.querySelector('.ui-feedbacks')
       }
     ]
   })

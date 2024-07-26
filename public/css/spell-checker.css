@@ -112,7 +112,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
 .spell-check-status:hover, .spell-check-status:visited {
