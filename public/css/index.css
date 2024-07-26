@@ -521,6 +521,7 @@ div[contenteditable]:empty:not(:focus):before{
 
 .status-bar .status-indicators .status-keymap > a,
 .status-bar .status-indicators .status-theme > a,
+.status-bar .status-indicators .status-feedbacks > a,
 .status-bar .status-indicators .status-spellcheck > a,
 .status-bar .status-indicators .status-preferences > a {
     color: inherit;
@@ -528,6 +529,7 @@ div[contenteditable]:empty:not(:focus):before{
 }
 
 .status-bar .status-indicators .status-theme,
+.status-bar .status-indicators .status-feedbacks,
 .status-bar .status-indicators .status-spellcheck,
 .status-bar .status-indicators .status-preferences {
     padding: 0 4.3px;
@@ -609,7 +611,8 @@ div[contenteditable]:empty:not(:focus):before{
     display: none;
 }
 
-.status-bar .status-overwrite:hover, .status-bar .indent-type:hover, .status-bar .indent-width-label:hover {
+.status-bar .status-overwrite:hover, .status-bar .indent-type:hover, .status-bar .feedbacks-text:hover, .status-bar .indent-width-label:hover {
+    text-underline-offset: 4px;
     text-decoration: underline;
 }
 
