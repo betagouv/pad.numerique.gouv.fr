@@ -22,7 +22,7 @@ export function initTutorial () {
     steps: [
       {
         title: 'Nouveauté',
-        intro: "Un correcteur d’orthographe et de grammaire est disponible en version bêta. Vous pouvez l'activer ou la désactiver en cochant cette case.",
+        intro: "Un correcteur d’orthographe et de grammaire est disponible en version bêta. Vous pouvez l'activer ou le désactiver en cochant cette case.",
         element: spellCheckToggle
       },
       {
