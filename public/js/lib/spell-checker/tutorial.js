@@ -37,6 +37,9 @@ export function initTutorial () {
       }
     ]
   })
+  intro.onstart(() => {
+    document.querySelector('body').classList.add('introjs-tour')
+  })
   intro.onexit(() => {
     document.querySelector('body').classList.remove('introjs-tour')
     intro.setDontShowAgain(true)
