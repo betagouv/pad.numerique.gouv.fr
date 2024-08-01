@@ -1,6 +1,13 @@
 import introJs from 'intro.js'
 import 'intro.js/introjs.css'
 
+function isLargeScreen () {
+  if (typeof window === 'undefined') {
+    return
+  }
+  return window.matchMedia('(min-width: 768px)').matches
+}
+
 export function initTutorial () {
   const spellCheckToggle = document.querySelector('.status-spellcheck')
   const spellCheckStatus = document.querySelector('.spell-check-status')
@@ -44,7 +51,9 @@ export function initTutorial () {
     document.querySelector('body').classList.remove('introjs-tour')
     intro.setDontShowAgain(true)
   })
-  intro.start()
+  if (isLargeScreen()) {
+    intro.start()
+  }
 }
 
 export function closeTutorial () {
