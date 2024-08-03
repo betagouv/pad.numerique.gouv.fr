@@ -117,7 +117,8 @@ SpellChecker.fetchData = (editor) => {
 
   SpellChecker.currentRequest = $.post(`${serverurl}/check/`, {
     text,
-    language: 'fr'
+    language: 'fr',
+    sessionId: SpellChecker._getNoteId()
   })
     .done(data => {
       // LanguageTool returns an offset, but CodeMirror needs a line and character position
@@ -142,6 +143,16 @@ SpellChecker.fetchData = (editor) => {
         SpellChecker.updateStatus(null, true)
       }
     })
+}
+
+SpellChecker._getNoteId = () => {
+  const url = window.location.href
+  const noteIdRegex = /\/([a-zA-Z0-9]+)\?/
+  const match = url.match(noteIdRegex)
+  if (!match) {
+    return ''
+  }
+  return match[1]
 }
 
 SpellChecker.updateState = (data, editor) => {
